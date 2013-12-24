@@ -12,8 +12,12 @@ gem 'jbuilder', '1.0.2' # Build JSON APIs with ease. Read more: https://github.c
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
+
+  # rspec
   gem 'rspec-rails', '2.13.1'
   gem 'guard-rspec', '2.5.0'
+
+  # spork
   gem 'spork-rails', '4.0.0'
   gem 'guard-spork', '1.5.0'
   gem 'childprocess', '0.3.6'
