@@ -14,8 +14,9 @@ group :development, :test do
   gem 'sqlite3', '1.3.8'
 
   # rspec
-  gem 'rspec-rails', '2.13.1'
+  gem 'rspec-rails', '2.13.1' # 封装 RSpec 的程序，还包含了一些专为 Rails 提供的功能
   gem 'guard-rspec', '2.5.0'
+  gem "factory_girl_rails", "4.2.1" # 把 Rails 生成测试数据默认使用的固件换成更好用的预构件
 
   # spork
   gem 'spork-rails', '4.0.0'
@@ -25,8 +26,11 @@ end
 
 group :test do
   gem 'libnotify', '0.8.0'
-  gem 'selenium-webdriver', '2.35.1'
+  gem 'selenium-webdriver', '2.35.1' # 结合 Capybara 测试基于 JavaScript 的交互操作
   gem 'capybara', '2.1.0'
+  gem "faker", "1.1.2"
+  gem "launchy", "2.3.0" # 这个 gem 的功能只有一个，但做的很好，如果需要，它会打开系统的默认浏览器，显示应用程序当前渲染的页面。调试测试时特别有用
+  gem "database_cleaner", "1.0.1" # 清理“测试数据库”，确保 RSpec 中的测试用例运行于一块净土之上
 end
 
 group :doc do
