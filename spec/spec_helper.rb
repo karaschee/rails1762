@@ -30,7 +30,7 @@ Spork.prefork do
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
     # examples within a transaction, remove the following line or assign false
     # instead of true.
-    config.use_transactional_fixtures = true
+    # config.use_transactional_fixtures = true
 
     # If true, the base class of anonymous controllers will be inferred
     # automatically. This will be the default behavior in future versions of
@@ -47,15 +47,20 @@ Spork.prefork do
     # Include Factory Girl syntax to simplify calls to factories
     config.include FactoryGirl::Syntax::Methods
 
-    config.generators do |g|
-      g.test_framework :rspec,
-        fixtures: true,
-        view_specs: false,
-        helper_specs: false,
-        routing_specs: false,
-        controller_specs: true,
-        request_specs: false
-      g.fixture_replacement :factory_girl, dir: "spec/factories"
+    # Use custom login macros in specs
+    # config.include LoginMacros # spec/support/login_macros.rb
+
+    # Set config.use_transactional_fixtures to false
+    # About gem database_cleaner
+    config.use_transactional_fixtures = false
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :truncation
+    end
+    config.before(:each) do
+      DatabaseCleaner.start
+    end
+    config.after(:each) do
+      DatabaseCleaner.clean
     end
   end
 end
