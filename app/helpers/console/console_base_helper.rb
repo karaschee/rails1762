@@ -1,0 +1,2 @@
+module Console::ConsoleBaseHelper
+end

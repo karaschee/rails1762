@@ -1,0 +1,8 @@
+<h1>Console::Shows#new</h1>
+
+<%= form_for @show, url: console_shows_path do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+  <p>
+    <%= f.submit "Submit" %>
+  </p>
+<% end %>

@@ -1,0 +1,10 @@
+<%= link_to "++ new ++", new_console_show_path %>
+<ul>
+  <% @shows.each do |show| %>
+    <li>
+      <%= show.name %> : 
+      <%= link_to "edit", edit_console_show_path(show) %> | 
+      <%= link_to "delete", console_show_path(show), method: :delete %>
+    </li>
+  <% end %>
+</ul>
