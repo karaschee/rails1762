@@ -1,10 +1,29 @@
-<%= link_to "++ new ++", new_console_show_path %>
-<ul>
-  <% @shows.each do |show| %>
-    <li>
-      <%= show.name %> : 
-      <%= link_to "edit", edit_console_show_path(show) %> | 
-      <%= link_to "delete", console_show_path(show), method: :delete %>
-    </li>
-  <% end %>
-</ul>
+<div class="table-responsive">
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>频道名</th>
+        <th>新建时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @shows.each do |show| %>
+        <tr>
+          <td><%= show.name %></td>
+          <td><%= show.created_at %></td>
+          <td>
+            <div class="btn-group btn-group-xs">
+              <%= link_to edit_console_show_path(show), class: "btn btn-default" do %>
+                <span class="glyphicon glyphicon-edit"></span> 编辑
+              <% end %>
+              <%= link_to console_show_path(show), method: :delete, class: "btn btn-danger" do %>
+                <span class="glyphicon glyphicon-remove-circle"></span> 删除
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
