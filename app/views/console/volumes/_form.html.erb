@@ -1,0 +1,14 @@
+<div class="form-group">
+  <%= f.label :title, "标题" %>
+  <%= f.text_field :title, class: "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :show_id, "所属频道" %>
+  <%= f.select :show_id, options_from_collection_for_select(@shows, 'id', 'name'), { prompt: true }, class: "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :desc, "描述" %>
+  <%= f.text_area :desc, class: "form-control", rows: 5 %>
+</div>

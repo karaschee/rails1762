@@ -3,7 +3,7 @@ class Console::ShowsController < Console::ConsoleBaseController
   before_action :find_show, only: [ :edit, :update, :destroy ]
 
   def index
-    @shows = Show.all
+    @shows = Show.page(params[:page])
   end
 
   def new

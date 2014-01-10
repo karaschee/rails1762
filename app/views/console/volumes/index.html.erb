@@ -1,0 +1,44 @@
+<ul class="nav nav-pills">
+  <% Show.all.each do |show| %>
+    <li>
+      <%= link_to show.name, console_volumes_path(show_id: show.id) %>
+    </li>
+  <% end %>
+</ul>
+
+<hr>
+
+<div class="table-responsive">
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>标题</th>
+        <th>所属频道</th>
+        <th>新建时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @volumes.each do |vol| %>
+        <tr>
+          <td><%= vol.title %></td>
+          <td><%= vol.belonged_show %></td>
+          <td><%= vol.created_at %></td>
+          <td>
+            <div class="btn-group btn-group-xs">
+              <%= link_to edit_console_volume_path(vol), class: "btn btn-default" do %>
+                <span class="glyphicon glyphicon-edit"></span> 编辑
+              <% end %>
+              <%= link_to console_volume_path(vol), method: :delete, class: "btn btn-danger", confirm: "确定要删除么？" do %>
+                <span class="glyphicon glyphicon-remove-circle"></span> 删除
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= paginate @volumes, :theme => 'bootstrap' %>

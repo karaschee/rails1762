@@ -3,4 +3,8 @@ class Volume < ActiveRecord::Base
 
   validates :title, presence: true
   validates :desc, presence: true
+
+  def belonged_show
+    show.present? ? show.name : "无"
+  end
 end

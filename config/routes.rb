@@ -4,6 +4,10 @@ Rails1762::Application.routes.draw do
     resources :shows
   end
 
+  namespace :console do
+    resources :volumes
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
