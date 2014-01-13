@@ -38,7 +38,11 @@
         </div>
         <div class="list-group">
           <%= link_to "节目", console_volumes_path, class: "list-group-item" %>
-          <%= link_to "新增节目", new_console_volume_path, class: "list-group-item" %>
+          <% if content_for?(:new_volume) %>
+            <%= yield :new_volume %>
+          <% else %>
+            <%= link_to "新增节目", new_console_volume_path, class: "list-group-item" %>
+          <% end %>
         </div>
       </div>
 

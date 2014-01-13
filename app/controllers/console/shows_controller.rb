@@ -1,9 +1,12 @@
 class Console::ShowsController < Console::ConsoleBaseController
 
-  before_action :find_show, only: [ :edit, :update, :destroy ]
+  before_action :find_show, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @shows = Show.page(params[:page])
+  end
+
+  def show
   end
 
   def new
@@ -11,7 +14,6 @@ class Console::ShowsController < Console::ConsoleBaseController
   end
 
   def edit
-    render 'edit'
   end
 
   def create

@@ -1,31 +1,36 @@
-<div class="table-responsive">
-  <table class="table table-hover table-striped">
-    <thead>
-      <tr>
-        <th>频道名</th>
-        <th>新建时间</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @shows.each do |show| %>
+<%= if_data_present(@shows) do %>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped">
+      <thead>
         <tr>
-          <td><%= show.name %></td>
-          <td><%= show.created_at %></td>
-          <td>
-            <div class="btn-group btn-group-xs">
-              <%= link_to edit_console_show_path(show), class: "btn btn-default" do %>
-                <span class="glyphicon glyphicon-edit"></span> 编辑
-              <% end %>
-              <%= link_to console_show_path(show), method: :delete, class: "btn btn-danger", confirm: "确定要删除么？" do %>
-                <span class="glyphicon glyphicon-remove-circle"></span> 删除
-              <% end %>
-            </div>
-          </td>
+          <th>频道名</th>
+          <th>新建时间</th>
+          <th>操作</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        <% @shows.each do |show| %>
+          <tr>
+            <td><%= show.name %></td>
+            <td><%= show.created_at %></td>
+            <td>
+              <div class="btn-group btn-group-xs">
+                <%= link_to edit_console_show_path(show), class: "btn btn-default" do %>
+                  <span class="glyphicon glyphicon-edit"></span> 编辑
+                <% end %>
+                <%= link_to console_show_volumes_path(show), class: "btn btn-default" do %>
+                  <span class="glyphicon glyphicon-th-list"></span> 节目
+                <% end %>   
+                <%= link_to console_show_path(show), method: :delete, class: "btn btn-danger", confirm: "确定要删除么？" do %>
+                  <span class="glyphicon glyphicon-remove-circle"></span> 删除
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<%= paginate @shows, :theme => 'bootstrap' %>
+  <%= paginate @shows, :theme => 'bootstrap' %>
+<% end %>

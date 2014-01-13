@@ -5,8 +5,8 @@ class Console::VolumesController < Console::ConsoleBaseController
   def index
     show_id = params[:show_id]
     if show_id
-      group = Volume.find_by_show_id(params[:show_id])
-      @volumes = Kaminari.paginate_array(group).page(params[:page])
+      @show = Show.find(show_id)
+      @volumes = Kaminari.paginate_array(@show.volumes).page(params[:page])
     else
       @volumes = Volume.page params[:page]
     end
@@ -15,10 +15,13 @@ class Console::VolumesController < Console::ConsoleBaseController
   def new
     @volume = Volume.new
     @shows = Show.all
+    if params[:show_id].present?
+      @from_show_id = params[:show_id]
+    end
   end
 
   def edit
-    render 'edit'
+    @shows = Show.all
   end
 
   def create
