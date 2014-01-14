@@ -1,0 +1,78 @@
+Model
+
+Show
+name:string
+desc:string
+- has_many :volumes
+= validates :name,  presence: true, uniqueness: true
+
+Volume
+show_id:integer
+title:string
+resource:string (资源地址)
+desc:string (简单描述，例如itunes那个简介)
+content:string（详细的说明，包括曲包地址、相关视频微博地址等）
+- belongs_to :show
+- has_many :timelines, dependent: :destroy
+- has_many :cards, through: "timelines"
+- has_many :volume_tags
+- has_many :tags, through: "volume_tags"
+= validates :show_id,  presence: true
+= validates :title,  presence: true, uniqueness: true
+
+Timeline
+volume_id:integer
+card_id:integer
+at_time:integer
+- belongs_to :card
+- belongs_to :volume
+= validates :volume_id,  presence: true
+= validates :card_id,  presence: true
+= validates :at_time,  presence: true
+
+Card
+card_type_id:integer
+name:string
+content:string
+- belongs_to :card_type
+- has_many :timelines, dependent: :destroy
+- has_many :volumes, through: "timelines"
+- has_many :card_tags
+- has_many :tags, through: "card_tags"
+= validates :name,  presence: true, uniqueness: true
+
+CardType
+name:string
+desc:string
+- has_many :cards
+= validates :name,  presence: true, uniqueness: true
+
+VolumeTag
+tag_id:integer
+volume_id:integer
+count:integer(默认值0)
+- belongs_to :volume
+- belongs_to :tag
+= validates :volume_id,  presence: true
+= validates :tag_id,  presence: true, uniqueness: { scope: :volume_id }
+= validates :count,  presence: true, uniqueness: { scope: :tag_id }
+
+CardTag
+tag_id:integer
+card_id:integer
+count:integer(默认值0)
+- belongs_to :card
+- belongs_to :tag
+= validates :card_id,  presence: true
+= validates :tag_id,  presence: true, uniqueness: { scope: :card_id }
+= validates :count,  presence: true, uniqueness: { scope: :tag_id }
+
+Tag
+name:string
+- has_many :volume_tags
+- has_many :volumes, through: :volume_tags
+- has_many :card_tags
+- has_many :cards, through: :card_tags
+= validates :name, presence: true, uniqueness: true
+
+
