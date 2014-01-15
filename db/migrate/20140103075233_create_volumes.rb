@@ -5,6 +5,7 @@ class CreateVolumes < ActiveRecord::Migration
       t.string :resource
       t.string :title
       t.string :desc
+      t.string :content
 
       t.timestamps
     end

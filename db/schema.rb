@@ -11,11 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140103075233) do
+ActiveRecord::Schema.define(version: 20140115070729) do
+
+  create_table "card_types", force: true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cards", force: true do |t|
+    t.integer  "card_type_id"
+    t.string   "title"
+    t.string   "desc"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "shows", force: true do |t|
     t.string   "name"
     t.string   "desc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "timelines", force: true do |t|
+    t.integer  "volume_id"
+    t.integer  "card_id"
+    t.integer  "at_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -25,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140103075233) do
     t.string   "resource"
     t.string   "title"
     t.string   "desc"
+    t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

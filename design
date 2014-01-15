@@ -18,7 +18,7 @@ content:string（详细的说明，包括曲包地址、相关视频微博地址
 - has_many :volume_tags
 - has_many :tags, through: "volume_tags"
 = validates :show_id,  presence: true
-= validates :title,  presence: true, uniqueness: true
+= validates :title,  presence: true, uniqueness: { scope: :show_id }
 
 Timeline
 volume_id:integer
@@ -32,14 +32,15 @@ at_time:integer
 
 Card
 card_type_id:integer
-name:string
+title:string
+desc:string
 content:string
 - belongs_to :card_type
 - has_many :timelines, dependent: :destroy
 - has_many :volumes, through: "timelines"
 - has_many :card_tags
 - has_many :tags, through: "card_tags"
-= validates :name,  presence: true, uniqueness: true
+= validates :title, presence: true, uniqueness: { scope: :card_type_id }
 
 CardType
 name:string
