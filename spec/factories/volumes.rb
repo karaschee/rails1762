@@ -3,7 +3,8 @@
 FactoryGirl.define do
   factory :volume do
     association :show
-    title "MyString"
-    desc "MyString"
+    sequence(:title) { |n| "volume vol.#{n}" }
+    sequence(:resource) { "http://test.com/test.mp3" }
+    desc "desc..."
   end
 end

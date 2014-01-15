@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :show do
-    name "MyString"
-    desc "MyString"
+    sequence(:name) { |n| "show#{n}" }
+    desc "some description"
 
     factory :invalid_show do
       name nil

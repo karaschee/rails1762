@@ -6,9 +6,10 @@ describe Volume do
   end
 
   it { should validate_presence_of :title }
-  it { should validate_presence_of :desc }
+  it { should validate_uniqueness_of :title }
   it { should respond_to :title }
   it { should respond_to :desc }
+  it { should respond_to :resource }
   it { should respond_to :show }
-  pending 'should respond_to cards'
+  # it { should respond_to :timelines }
 end

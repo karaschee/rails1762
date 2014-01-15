@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140103075233) do
 
   create_table "volumes", force: true do |t|
     t.integer  "show_id"
+    t.string   "resource"
     t.string   "title"
     t.string   "desc"
     t.datetime "created_at"
