@@ -14,4 +14,22 @@ module ApplicationHelper
       content_tag(:p, "没有相关数据。")
     end
   end
+
+  def include_related_asset(asset)
+    if !Rails1762::Application.assets.find_asset(asset).nil?
+      case asset.split('.')[-1]
+        when 'js'
+          javascript_include_tag asset
+        when 'css'
+          stylesheet_link_tag asset
+      end
+    end
+  end
+
+  def include_module(name)
+    case name
+      # when 'module_name'
+      #   include_related_asset 'path/to/module.js'
+    end
+  end
 end

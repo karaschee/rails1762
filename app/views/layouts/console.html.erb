@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rails1762</title>
   <%= stylesheet_link_tag "console", media: "all", "data-turbolinks-track" => true %>
+  <%= render partial: "layouts/specific_css" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -61,17 +62,20 @@
       <p>© Company 2014</p>
     </footer>
 
-    <%= javascript_include_tag "console", "data-turbolinks-track" => true %>
-    <script type="text/javascript" src="/sea-modules/seajs/seajs/2.1.1/sea.js" id="seajsnode"></script>
-    <script type="text/javascript">
-      seajs.config({
-        // base: 'http://example.com/path/to/base/',
-        alias: {
-          'jquery': 'jquery/1.10.1/jquery'
-        }
-      });
-    </script>
-    <%= yield :javascripts %>
   </div>
+  
+  <!-- Javascripts -->
+  <%= javascript_include_tag "console", "data-turbolinks-track" => true %>
+  <%= render partial: "layouts/specific_js" %>
+  <script type="text/javascript" src="/sea-modules/seajs/seajs/2.1.1/sea.js" id="seajsnode"></script>
+  <script type="text/javascript">
+    seajs.config({
+      // base: 'http://example.com/path/to/base/',
+      alias: {
+        'jquery': 'jquery/1.10.1/jquery'
+      }
+    });
+  </script>
+  <%= yield :javascripts %>
 </body>
 </html>

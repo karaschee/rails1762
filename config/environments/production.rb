@@ -59,7 +59,15 @@ Rails1762::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile = [  # defaults
+                                Proc.new{ |path| !File.extname(path).in?(['.js', '.css', '.map']) },
+                                # all asset files for specific page
+                                /specific\/.*\.(css|js)$/,
+                                # layout global asset files
+                                'console.js', 'console.css',
+                                # default
+                                /application.(css|js)$/
+                              ]
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
