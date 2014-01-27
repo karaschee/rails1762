@@ -37,6 +37,10 @@
 </div> 
 
 <%= content_for :javascripts do %>
-  
+<script type="text/javascript"> 
+  seajs.use("jquery", function($){
+    // console.log($);
+  })
+</script>
 <% end %>
 
