@@ -28,8 +28,8 @@ module ApplicationHelper
 
   def include_module(name)
     case name
-      # when 'module_name'
-      #   include_related_asset 'path/to/module.js'
+      when 'module_name'
+#        include_related_asset 'path/to/module.js'
     end
   end
 end
