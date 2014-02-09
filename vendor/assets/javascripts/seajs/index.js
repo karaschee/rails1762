@@ -5,6 +5,7 @@ seajs.config({
   alias: {
   '$': 'jquery/jquery/1.10.1/jquery',
   'jquery': 'jquery/jquery/1.10.1/jquery',
-  'backbone': 'gallery/backbone/1.1.0/backbone'
+  'backbone': 'gallery/backbone/1.1.0/backbone',
+  'underscore': 'gallery/underscore/1.5.2/underscore'
   }
 });

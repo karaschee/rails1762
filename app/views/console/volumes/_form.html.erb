@@ -24,22 +24,152 @@
   <div class="col-sm-7">
     <div class="panel panel-default">
       <div class="panel-body">
-        <div class="form-inline">
-          <div class="form-group">
-            <%= f.label :resource, "资源地址", class: "sr-only" %>
-            <%= f.text_field :resource, class: "form-control", placeholder: "资源地址" %>
-          </div>
-          <button type="button" class="btn btn-default">确定</button>
+        <div id="j_resourceBox">
+
         </div>
       </div>
     </div>
   </div>
-</div> 
+</div>
+
+<div id="j_tip" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="mySmallModalLabel">提醒</h4>
+      </div>
+      <div class="modal-body">
+        无效的资源地址。
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/template" id="j_resourceTemplate">
+  <div class="form-inline" style="[% if(mode === 'show'){ %]display:none;[% } %]">
+    <div class="form-group">
+      <%= f.label :resource, "资源地址", class: "sr-only" %>
+      <%= f.text_field :resource, class: "form-control", placeholder: "资源地址" %>
+    </div>
+    <button type="button" id="j_btnConfirmResource" class="btn btn-default">确定</button>
+    [% if(value !== ''){ %]
+      <button type="button" id="j_btnCancelResource" class="btn btn-default">取消</button>
+    [% } %]
+  </div>
+  <div style="[% if(mode === 'edit'){ %]display:none;[% } %]">
+    <div>
+      <!-- http://c.tangsuanradio.com/gamecores/gadiovol102.mp3 -->
+      <audio id="j_player" src="[%= value %]" controls autoplay>
+        <p>Your browser does not support the audio element </p>
+      </audio>
+      <p>资源地址： [%= value %]</p>
+      <p>
+        <span class="label label-default">总时长度： <strong id="j_info_total">~</strong></span> 
+        <span class="label label-primary">目前进度： <strong id="j_info_current">~</strong></span>
+      </p>
+    </div>
+    <hr class="hr-s">
+    <button type="button" id="j_btnEditResource" class="btn btn-default">编辑</button>
+    <button type="button" id="" class="btn btn-default">新增</button>
+  </div>
+</script>
+
+<script type="text/template" id="j_resourceInfoTemplate">
+
+</script>
 
 <%= content_for :javascripts do %>
 <script type="text/javascript"> 
-  seajs.use(["jquery", "backbone"], function($, Backbone){
-    console.log(Backbone);
+  seajs.use(["underscore", "backbone"], function(_, Backbone){
+    // Backbone initialize - Resource
+    // ----------------------------------
+    var Resource = Backbone.Model.extend({
+      defaults: {
+        value: '<%= f.object.resource %>',
+        mode: 'show' // edit \ show
+      },
+      validate: function(attrs){
+        if( !/https?:\/\/.*\.mp3/.test(attrs.value) ){
+          return {
+            status: 0,
+            tip: '资源地址无效。'
+          };
+        }
+      }
+    });
+
+    var ResourceView = Backbone.View.extend({
+      timerInfo: false,
+      el: '#j_resourceBox',
+      template: _.template($('#j_resourceTemplate').html()),
+      initialize: function(){
+        var resource = new Resource();
+        var that = this;
+        
+        if(resource.get('value') === ''){ // edit
+          resource.set({mode: 'edit'});
+        }else { // show
+          this.refreshInfo();
+        }
+
+        resource.on('invalid', function(model, error){
+          if(error.status === 0){
+            that.showTip();
+          }
+        })
+
+        this.model = resource;
+        
+        this.listenTo(this.model, 'change:value', this.render);
+        this.listenTo(this.model, 'change:mode', this.render);
+        this.render();
+      },
+      render: function(){
+        this.$el.html( this.template(this.model.toJSON()) );
+      },
+      events: {
+        'click button#j_btnConfirmResource': 'confirmEdit',
+        'click button#j_btnEditResource': 'edit',
+        'click button#j_btnCancelResource': 'cancel'
+      },
+      confirmEdit: function(){
+        var url = this.$el.find('input').val();
+        this.model.set({value: url, mode: 'show'}, {validate: true});
+        this.refreshInfo();
+      },
+      edit: function(){
+        this.model.set({mode: 'edit'});
+      },
+      cancel: function(){
+        this.model.set({mode: 'show'});
+      },
+      showTip: function(){
+        $('#j_tip').modal('show');
+      },
+      refreshInfo: function(){
+        this.timerInfo = this.timerInfo || setInterval(function(){
+          var player = $('#j_player');
+          var total = player.prop('duration');
+          var current = player.prop('currentTime');
+
+          if(isNaN(total)) return;
+
+          $('#j_info_total').html(total);
+          $('#j_info_current').html(current);
+        }, 1000);
+      }
+    });
+
+    // Resource view
+    var resourceView = new ResourceView();
+
+
+    // Backbone initialize - Card
+    // ----------------------------------
+    var Card = new Backbone.Model.extend({
+      
+    });
   })
 </script>
 <% end %>
