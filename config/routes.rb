@@ -2,25 +2,22 @@ Rails1762::Application.routes.draw do
 
   namespace :console do
     resources :shows
+
     resources :volumes do
+      resources :timelines, only: [:index, :create]
       member do
-        get :timelines
         post :update_resource
       end
     end
+
     resources :shows do
       resources :volumes
     end
-    resources :cards do
-    end
+
+    resources :cards
+
     resources :card_types do
       resources :cards
-    end
-  end
-
-  resources :volumes do
-    member do
-      get :fetch_timelines
     end
   end
 

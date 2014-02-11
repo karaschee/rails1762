@@ -4,4 +4,8 @@ class Card < ActiveRecord::Base
   has_many :volumes, through: :timelines
 
   validates :title, presence: true, uniqueness: { scope: :card_type_id }
+
+  def card_type_name
+    card_type.try(:name)
+  end
 end

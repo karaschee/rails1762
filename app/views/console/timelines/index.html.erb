@@ -11,9 +11,13 @@
 
     <hr>
 
-    <p>
-      <input type="text" class="form-control" placeholder="查找资料卡" />
-    </p>
+    <div id="j_searchCard">
+      <p>
+        <input type="text" class="form-control" id="j_inputSearch" placeholder="查找资料卡" />
+      </p>
+      <table class="table table-hover table-bordered">
+      </table>
+    </div>
   </div>
 
   <div class="col-sm-6">
@@ -78,11 +82,15 @@
 </script>
 
 <script type="text/template" id="j_timelineTemplate">
-  <tr>
-    <td>[% at_time %]</td>
-    <td></td>
-    <td> <button type="button" class="btn btn-xs btn-default j_delTimeline">删除</button> </td>
-  </tr>
+  <td>[%= at_time %]</td>
+  <td>[%= card_title %]</td>
+  <td> <button type="button" class="btn btn-xs btn-default j_delTimeline">删除</button> </td>
+</script>
+
+<script type="text/template" id="j_cardTemplate">
+  <td>[%= card_type_name %]</td>
+  <td>[%= title %]</td>
+  <td> <button type="button" class="btn btn-xs btn-default j_addCard">添加</button> </td>
 </script>
 
 
@@ -200,15 +208,17 @@
       defaults: {
         volume_id: '<%= @volume.id %>',
         card_id: 0,
-        at_time: 0
+        at_time: 0,
+        '<%= request_forgery_protection_token.to_s %>': '<%= form_authenticity_token %>'
       },
       initialize: function(){
       }
     });
 
     var Timelines = Backbone.Collection.extend({
-      url: '<%= fetch_timelines_volume_path(@volume) %>',
-      model: Timeline
+      url: '<%= console_volume_timelines_path(@volume) %>',
+      model: Timeline,
+      comparator: 'at_time'
     });
 
     var TimelineView = Backbone.View.extend({
@@ -235,11 +245,12 @@
         var that = this;
         timelines.fetch({
           success: function(collection, response, options){
+            that.collection = collection;
             that.initTimelines();
           }
         });
-        
-        this.timelines = timelines;
+        that.listenTo(timelines, 'sync', that.syncEvent)
+        that.listenTo(timelines, 'add', that.addEvent)
       },
       events: {
         // 'click #j_addTimeline': 'createTimeline'
@@ -248,28 +259,99 @@
         var timelineView = new TimelineView({model: timeline});
         this.$el.append( timelineView.render(timeline.toJSON()) );
       },
-      // createTimeline: function(){
-      //   var player = $('#j_player');
-
-      //   if( isNaN(player.prop('duration')) ) return;
-
-      //   var total = parseInt(player.prop('duration'));
-      //   var current = parseInt(player.prop('currentTime'));
-
-      //   var timeline = new Timeline({
-      //     at_time: current
-      //   });
-
-      //   this.addTimeline(timeline);
-      // },
       initTimelines: function(){
-        this.timelines.each(this.addTimeline, this);
+        this.collection.each(this.addTimeline, this);
+      },
+      syncEvent: function(model, resp, options){
+        console.log('syncEvent');
+      },
+      addEvent: function(model, collection, options){
+        this.addTimeline(model);
       }
     });
 
     // Timeline javascripts
     // ----------------------------------
     var timelinesView = new TimelinesView();
+
+    // Backbone initialize - Card
+    // ----------------------------------
+    var Card = Backbone.Model.extend({
+
+    });
+
+    var Cards = Backbone.Collection.extend({
+      model: Card,
+      url: '<%= console_cards_path %>'
+    });
+
+    var CardView = Backbone.View.extend({
+      tagName: 'tr',
+      template: _.template($('#j_cardTemplate').html()),
+      render: function(){
+        return this.$el.html( this.template(this.model.toJSON()) );
+      },
+      events: {
+        'click .j_addCard': 'createTimeline'
+      },
+      createTimeline: function(e){
+        var player = $('#j_player');
+
+        if( isNaN(player.prop('duration')) ) return;
+
+        var total = parseInt(player.prop('duration'));
+        var current = parseInt(player.prop('currentTime'));
+
+        timelinesView.collection.create({
+          at_time: current,
+          card_id: this.model.get('id'),
+          card_title: this.model.get('title')
+        });
+      }
+    });
+
+    var CardsView = Backbone.View.extend({
+      el: '#j_searchCard',
+      initialize: function(){
+        var that = this;
+        var cards = new Cards();
+
+        this.elemList = this.$el.find('table');
+
+        cards.fetch({success: function(collection, response, options){
+          that.collection = collection;
+          that.initCardView();
+          that.render('');
+        }});
+      },
+      render: function(filter){
+        var tmpBox = $('<div>');
+        this.collection.each(function(card){
+          var view = card.get('view');
+          if(card.get('toFilter').indexOf(filter) !== -1){
+            tmpBox.append(view.render());
+          }
+        });
+        this.elemList.html( tmpBox.children().length === 0 ? '<tr><td>未搜索到结果</td></tr>' : tmpBox.children() );
+      },
+      initCardView: function(){
+        this.collection.each(function(card){
+          var cardView = new CardView({model: card});
+          card.set({
+            'view': cardView,
+            'toFilter': card.get('id')+card.get('card_type_name')+card.get('title')+card.get('desc')
+          });
+        });
+      },
+      events: {
+        'keyup #j_inputSearch': 'search'
+      },
+      search: function(e){
+        this.render( $(e.target).val() );
+      }
+    });
+
+    var cardsView = new CardsView();
   })
 </script>
 <% end %>

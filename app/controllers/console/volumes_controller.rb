@@ -1,6 +1,6 @@
 class Console::VolumesController < Console::ConsoleBaseController
 
-  before_action :find_volume, only: [ :edit, :update, :destroy, :timelines, :update_resource ]
+  before_action :find_volume, only: [ :edit, :update, :destroy, :update_resource ]
   before_action :get_shows, only: [:edit, :new, :create, :update]
 
   def index
@@ -43,9 +43,6 @@ class Console::VolumesController < Console::ConsoleBaseController
   def destroy
     @volume.destroy
     redirect_to console_volumes_path
-  end
-
-  def timelines
   end
 
   def update_resource

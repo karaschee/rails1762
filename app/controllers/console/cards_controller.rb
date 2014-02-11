@@ -10,6 +10,11 @@ class Console::CardsController < Console::ConsoleBaseController
     else
       @cards = Card.page params[:page]
     end
+    respond_to do |format|
+      format.js {
+        render json: Card.all, methods: [:card_type_name]
+      }
+    end
   end
 
   def show
