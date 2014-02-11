@@ -4,7 +4,7 @@ Rails1762::Application.routes.draw do
     resources :shows
 
     resources :volumes do
-      resources :timelines, only: [:index, :create]
+      resources :timelines, only: [:index, :create, :destroy]
       member do
         post :update_resource
       end

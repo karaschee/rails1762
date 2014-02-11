@@ -18,6 +18,12 @@ class Console::TimelinesController < Console::ConsoleBaseController
     end
   end
 
+  def destroy
+    t = Timeline.find params[:id]
+    t.destroy
+    render json: {}
+  end
+
   private
     def timeline_params
       params.permit(:at_time, :volume_id, :card_id)
