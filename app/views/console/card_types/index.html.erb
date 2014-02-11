@@ -1,0 +1,36 @@
+<%= if_data_present(@card_types) do %>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>新建时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @card_types.each do |card_type| %>
+          <tr>
+            <td><%= card_type.name %></td>
+            <td><%= card_type.created_at %></td>
+            <td>
+              <div class="btn-group btn-group-xs">
+                <%= link_to edit_console_card_type_path(card_type), class: "btn btn-default" do %>
+                  <span class="glyphicon glyphicon-edit"></span> 编辑
+                <% end %>
+                <%= link_to console_card_type_cards_path(card_type), class: "btn btn-default" do %>
+                  <span class="glyphicon glyphicon-th-list"></span> 资料卡
+                <% end %>   
+                <%= link_to console_card_type_path(card_type), method: :delete, class: "btn btn-danger", confirm: "确定要删除么？" do %>
+                  <span class="glyphicon glyphicon-remove-circle"></span> 删除
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= paginate @card_types, :theme => 'bootstrap' %>
+<% end %>

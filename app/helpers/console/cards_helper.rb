@@ -1,0 +1,2 @@
+module Console::CardsHelper
+end

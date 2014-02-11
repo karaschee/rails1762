@@ -45,6 +45,14 @@
             <%= link_to "新增节目", new_console_volume_path, class: "list-group-item" %>
           <% end %>
         </div>
+        <div class="list-group">
+          <%= link_to "资料卡", console_cards_path, class: "list-group-item" %>
+          <%= link_to "新增资料卡", new_console_card_path, class: "list-group-item" %>
+        </div>
+        <div class="list-group">
+          <%= link_to "资料卡分类", console_card_types_path, class: "list-group-item" %>
+          <%= link_to "新增资料卡分类", new_console_card_type_path, class: "list-group-item" %>
+        </div>
       </div>
 
       <div class="col-xs-12 col-sm-10">

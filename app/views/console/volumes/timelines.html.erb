@@ -1,0 +1,276 @@
+<p class="lead">
+  <%= @volume.title %> - 管理资料卡
+</p>
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <div id="j_resourceBox">
+
+    </div>
+
+    <hr>
+
+    <p>
+      <input type="text" class="form-control" placeholder="查找资料卡" />
+    </p>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <th>时间</th>
+          <th>标题</th>
+          <th>操作</th>
+        </thead>
+        <tbody id="j_timelineList"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div id="j_tip" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="mySmallModalLabel">提醒</h4>
+      </div>
+      <div class="modal-body">
+        无效的资源地址。
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/template" id="j_resourceTemplate">
+  [% if(mode === 'edit'){ %]
+    <div class="form-inline" style="">
+      <div class="form-group">
+        <input class="form-control", placeholder: "资源地址", value: "[%= value %]" />
+      </div>
+      <button type="button" id="j_btnConfirmResource" data-loading-text="Loading..." class="btn btn-default">确定</button>
+      [% if(value !== ''){ %]
+        <button type="button" id="j_btnCancelResource" class="btn btn-default">取消</button>
+      [% } %]
+    </div>
+  [% }else if(mode === 'show'){ %]
+    <div>
+      <div>
+        <!-- http://c.tangsuanradio.com/gamecores/gadiovol102.mp3 -->
+        <p>
+          <audio id="j_player" src="[%= value %]" controls autoplay>
+            Your browser does not support the audio element
+          </audio>
+        </p>
+        <p><button type="button" id="j_btnEditResource" class="btn btn-xs btn-default">编辑</button> <em>[%= value %]</em></p> 
+        <p>
+          <span class="label label-default">总时长度： <strong id="j_info_total">~</strong></span> 
+          <span class="label label-primary">目前进度： <strong id="j_info_current">~</strong></span>
+        </p>
+      </div>
+    </div>
+  [% } %]
+</script>
+
+<script type="text/template" id="j_timelineTemplate">
+  <tr>
+    <td>[% at_time %]</td>
+    <td></td>
+    <td> <button type="button" class="btn btn-xs btn-default j_delTimeline">删除</button> </td>
+  </tr>
+</script>
+
+
+<%= content_for :javascripts do %>
+<script type="text/javascript"> 
+  seajs.use(["underscore", "backbone"], function(_, Backbone){
+    // Backbone initialize - Resource
+    // ----------------------------------
+    var Resource = Backbone.Model.extend({
+      url: '<%= update_resource_console_volume_path(@volume) %>',
+      defaults: {
+        value: '<%= @volume.resource %>',
+        mode: 'show', // edit \ show
+        '<%= request_forgery_protection_token.to_s %>': '<%= form_authenticity_token %>'
+      },
+      initialize: function(){
+      },
+      validate: function(attrs){
+        if( !/https?:\/\/.*\.mp3/.test(attrs.value) ){
+          return {
+            status: 0,
+            tip: '资源地址无效。'
+          };
+        }
+      }
+    });
+
+    var ResourceView = Backbone.View.extend({
+      timerInfo: false,
+      el: '#j_resourceBox',
+      template: _.template($('#j_resourceTemplate').html()),
+      initialize: function(){
+        var resource = new Resource();
+        var that = this;
+        
+        if(resource.get('value') === ''){ // edit
+          resource.set({mode: 'edit'});
+        }else { // show
+          this.refreshInfo();
+        }
+
+        resource.on('invalid', function(model, error){
+          if(error.status === 0){
+            that.showTip();
+          }
+        })
+
+        this.model = resource;
+        
+        this.listenTo(this.model, 'change:value', function(){
+          that.model.save({}, {success:function(){
+            that.showMode();
+          }})
+        });
+        this.listenTo(this.model, 'change:mode', this.render);
+        this.listenTo(this.model, 'change:mode', this.modeChange);
+        this.render();
+      },
+      render: function(){
+        this.$el.html( this.template(this.model.toJSON()) );
+      },
+      events: {
+        'click button#j_btnConfirmResource': 'confirmEdit',
+        'click button#j_btnEditResource': 'editMode',
+        'click button#j_btnCancelResource': 'showMode'
+      },
+      confirmEdit: function(){
+        var url = this.$el.find('input').val();
+        console.log(this.model.get('value'));
+        console.log(url);
+        if(this.model.get('value') === url){
+          this.showMode();
+        }else {
+          $('#j_btnConfirmResource').button('loading');
+          this.model.set({value: url});
+        }
+      },
+      editMode: function(){
+        this.model.set({mode: 'edit'});
+      },
+      showMode: function(){
+        this.model.set({mode: 'show'});
+      },
+      showTip: function(){
+        $('#j_tip').modal('show');
+      },
+      refreshInfo: function(){
+        this.timerInfo = this.timerInfo || setInterval(function(){
+          var player = $('#j_player');
+
+          if(player.length === 0) return;
+
+          var total = player.prop('duration');
+          var current = player.prop('currentTime');
+
+          if(isNaN(total)) return;
+
+          $('#j_info_total').html(total);
+          $('#j_info_current').html(current);
+        }, 1000);
+      },
+      modeChange: function(){
+        if(this.model.get('mode') === 'edit'){
+          clearInterval(this.timerInfo);
+          this.timerInfo = false;
+        }
+      }
+    });
+
+    var resourceView = new ResourceView();
+
+    // Backbone initialize - Timeline
+    // ----------------------------------
+    var Timeline = Backbone.Model.extend({
+      defaults: {
+        volume_id: '<%= @volume.id %>',
+        card_id: 0,
+        at_time: 0
+      },
+      initialize: function(){
+      }
+    });
+
+    var Timelines = Backbone.Collection.extend({
+      url: '<%= fetch_timelines_volume_path(@volume) %>',
+      model: Timeline
+    });
+
+    var TimelineView = Backbone.View.extend({
+      tagName: 'tr',
+      template: _.template($('#j_timelineTemplate').html()),
+      initialize: function(){
+        this.listenTo(this.model, 'destroy', this.remove)
+      },
+      render: function(data){
+        return this.$el.html( this.template(data) )
+      },
+      events: {
+        'click .j_delTimeline': 'del'
+      },
+      del: function(){
+        this.model.destroy();
+      }
+    });
+
+    var TimelinesView = Backbone.View.extend({
+      el: '#j_timelineList',
+      initialize: function(){
+        var timelines = new Timelines();
+        var that = this;
+        timelines.fetch({
+          success: function(collection, response, options){
+            that.initTimelines();
+          }
+        });
+        
+        this.timelines = timelines;
+      },
+      events: {
+        // 'click #j_addTimeline': 'createTimeline'
+      },
+      addTimeline: function(timeline){
+        var timelineView = new TimelineView({model: timeline});
+        this.$el.append( timelineView.render(timeline.toJSON()) );
+      },
+      // createTimeline: function(){
+      //   var player = $('#j_player');
+
+      //   if( isNaN(player.prop('duration')) ) return;
+
+      //   var total = parseInt(player.prop('duration'));
+      //   var current = parseInt(player.prop('currentTime'));
+
+      //   var timeline = new Timeline({
+      //     at_time: current
+      //   });
+
+      //   this.addTimeline(timeline);
+      // },
+      initTimelines: function(){
+        this.timelines.each(this.addTimeline, this);
+      }
+    });
+
+    // Timeline javascripts
+    // ----------------------------------
+    var timelinesView = new TimelinesView();
+  })
+</script>
+<% end %>
+

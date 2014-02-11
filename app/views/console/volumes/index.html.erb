@@ -38,6 +38,9 @@
                 <%= link_to edit_console_volume_path(vol), class: "btn btn-default" do %>
                   <span class="glyphicon glyphicon-edit"></span> 编辑
                 <% end %>
+                <%= link_to timelines_console_volume_path(vol), class: "btn btn-default" do %>
+                  <span class="glyphicon glyphicon-list"></span> 资料卡
+                <% end %>
                 <%= link_to console_volume_path(vol), method: :delete, class: "btn btn-danger", confirm: "确定要删除么？" do %>
                   <span class="glyphicon glyphicon-remove-circle"></span> 删除
                 <% end %>

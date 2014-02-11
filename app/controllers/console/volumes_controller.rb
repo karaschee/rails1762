@@ -1,10 +1,11 @@
 class Console::VolumesController < Console::ConsoleBaseController
 
-  before_action :find_volume, only: [ :edit, :update, :destroy ]
+  before_action :find_volume, only: [ :edit, :update, :destroy, :timelines, :update_resource ]
+  before_action :get_shows, only: [:edit, :new, :create, :update]
 
   def index
     show_id = params[:show_id]
-    if show_id
+    if show_id.present?
       @show = Show.find(show_id)
       @volumes = Kaminari.paginate_array(@show.volumes).page(params[:page])
     else
@@ -14,14 +15,12 @@ class Console::VolumesController < Console::ConsoleBaseController
 
   def new
     @volume = Volume.new
-    @shows = Show.all
     if params[:show_id].present?
       @from_show_id = params[:show_id]
     end
   end
 
   def edit
-    @shows = Show.all
   end
 
   def create
@@ -46,6 +45,14 @@ class Console::VolumesController < Console::ConsoleBaseController
     redirect_to console_volumes_path
   end
 
+  def timelines
+  end
+
+  def update_resource
+    @volume.update_attribute('resource', params[:value])
+    render json: {}
+  end
+
   private
 
     def find_volume
@@ -54,5 +61,9 @@ class Console::VolumesController < Console::ConsoleBaseController
 
     def volume_params
       params.require(:volume).permit(:title, :desc, :show_id)
+    end
+
+    def get_shows
+      @shows = Show.all
     end
 end

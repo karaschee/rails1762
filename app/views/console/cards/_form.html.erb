@@ -1,0 +1,19 @@
+<div class="form-group">
+  <%= f.label :title, "标题*" %>
+  <%= f.text_field :title, class: "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :card_type_id, "所属类别" %>
+  <%= f.select :card_type_id, options_from_collection_for_select(@card_types, 'id', 'name', f.object.card_type_id), { prompt: true }, class: "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :desc, "描述" %>
+  <%= f.text_area :desc, class: "form-control", rows: 3 %>
+</div>
+
+<div class="form-group">
+  <%= f.label :content, "内容" %>
+  <%= f.text_area :content, class: "form-control", rows: 5 %>
+</div>
