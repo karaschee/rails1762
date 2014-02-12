@@ -14,6 +14,7 @@ class Console::CardsController < Console::ConsoleBaseController
       format.js {
         render json: Card.all, methods: [:card_type_name]
       }
+      format.html {}
     end
   end
 
