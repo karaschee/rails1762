@@ -243,30 +243,40 @@
       initialize: function(){
         var timelines = new Timelines();
         var that = this;
-        timelines.fetch({
-          success: function(collection, response, options){
-            that.collection = collection;
-            that.initTimelines();
-          }
-        });
-        that.listenTo(timelines, 'sync', that.syncEvent)
-        that.listenTo(timelines, 'add', that.addEvent)
+
+        this.collection = timelines;
+
+        this.listenTo(timelines, 'sync', this.syncEvent);
+        this.listenTo(timelines, 'request', this.requestEvent);
+        timelines.fetch({success: function(){
+          that.initRender();
+        }});
       },
       events: {
         // 'click #j_addTimeline': 'createTimeline'
       },
       addTimeline: function(timeline){
+        var i = timeline.collection.models.indexOf(timeline);
         var timelineView = new TimelineView({model: timeline});
-        this.$el.append( timelineView.render(timeline.toJSON()) );
+        var toRender = timelineView.render(timeline.toJSON());
+
+        if(i === 0){
+          this.$el.prepend(toRender);
+        }else {
+          this.$el.children().eq(i-1).after(toRender);
+        }
       },
-      initTimelines: function(){
+      initRender: function(){
         this.collection.each(this.addTimeline, this);
       },
       syncEvent: function(model, resp, options){
-        console.log('syncEvent');
+        console.log('------------- request end --------------');
+        if(resp.status === 1){ // create a new Model
+          this.addTimeline(model);
+        }
       },
-      addEvent: function(model, collection, options){
-        this.addTimeline(model);
+      requestEvent: function(){
+        console.log('------------- request start --------------');
       }
     });
 
@@ -299,11 +309,8 @@
 
         if( isNaN(player.prop('duration')) ) return;
 
-        var total = parseInt(player.prop('duration'));
-        var current = parseInt(player.prop('currentTime'));
-
         timelinesView.collection.create({
-          at_time: current,
+          at_time: parseInt(player.prop('currentTime')),
           card_id: this.model.get('id'),
           card_title: this.model.get('title')
         });
