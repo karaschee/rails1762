@@ -110,7 +110,7 @@
 
 <%= content_for :javascripts do %>
 <script type="text/javascript"> 
-  seajs.use(["$", "underscore", "backbone"], function($, _, Backbone){
+  seajs.use(["underscore", "backbone"], function(_, Backbone){
     // passing the token in Backbone AJAX calls
     Backbone.sync = _.wrap(Backbone.sync, function(sync, method, model, options){
       if(method == 'create' || method == 'update' || method == 'delete') {
