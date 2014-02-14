@@ -110,7 +110,9 @@
 
 <%= content_for :javascripts do %>
 <script type="text/javascript"> 
-  seajs.use(["underscore", "backbone"], function(_, Backbone){
+  seajs.use(["underscore", "backbone", "tinytip"], function(_, Backbone, Tinytip){
+    var tinytip = new Tinytip();
+
     // passing the token in Backbone AJAX calls
     Backbone.sync = _.wrap(Backbone.sync, function(sync, method, model, options){
       if(method == 'create' || method == 'update' || method == 'delete') {
@@ -293,12 +295,14 @@
         this.collection.each(this.addTimeline, this);
       },
       syncEvent: function(model, resp, options){
+        tinytip.hide();
         console.log('------------- request end --------------');
         if(resp.status === 1){ // create a new Model
           this.addTimeline(model);
         }
       },
       requestEvent: function(){
+        tinytip.show();
         console.log('------------- request start --------------');
       }
     });
