@@ -1,0 +1,29 @@
+{
+  "family": "karaschee",
+  "name": "tinytip",
+  "version": "1.0.0",
+  "description": "a tiny tip jquery plugin.",
+  "homepage": "",
+  "author": "karaschee",
+  "maintainers": [
+    "karaschee"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "no"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [],
+  "licenses": "MIT",
+  "spm": {
+    "output": [
+      "tinytip.js",
+      "tinytip.css"
+    ],
+    "alias": {},
+    "devAlias": {},
+    "engines": {}
+  }
+}
