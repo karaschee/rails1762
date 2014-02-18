@@ -7,9 +7,10 @@ module ApplicationHelper
     end
   end
 
-  def if_data_present(data)
-    if data.present?
-      yield.html_safe
+  def if_data_present(data, is_show = nil, &block)
+    content = capture(&block)
+    if is_show.nil? ? data.present? : is_show 
+      content
     else
       content_tag(:p, "没有相关数据。")
     end
