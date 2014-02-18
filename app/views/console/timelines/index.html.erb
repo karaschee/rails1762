@@ -111,7 +111,14 @@
 <%= content_for :javascripts do %>
 <script type="text/javascript"> 
   seajs.use(["underscore", "backbone", "tinytip"], function(_, Backbone, Tinytip){
-    var tinytip = new Tinytip();
+    var requestTip = new Tinytip();
+
+    Backbone.$(document).ajaxStart(function() {
+      requestTip.show();
+    });
+    Backbone.$(document).ajaxStop(function() {
+      requestTip.hide();
+    });
 
     // passing the token in Backbone AJAX calls
     Backbone.sync = _.wrap(Backbone.sync, function(sync, method, model, options){
@@ -272,7 +279,6 @@
         this.collection = timelines;
 
         this.listenTo(timelines, 'sync', this.syncEvent);
-        this.listenTo(timelines, 'request', this.requestEvent);
         timelines.fetch({success: function(){
           that.initRender();
         }});
@@ -295,15 +301,9 @@
         this.collection.each(this.addTimeline, this);
       },
       syncEvent: function(model, resp, options){
-        tinytip.hide();
-        console.log('------------- request end --------------');
         if(resp.status === 1){ // create a new Model
           this.addTimeline(model);
         }
-      },
-      requestEvent: function(){
-        tinytip.show();
-        console.log('------------- request start --------------');
       }
     });
 
