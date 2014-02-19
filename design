@@ -12,6 +12,7 @@ title:string
 resource:string (资源地址)
 desc:string (简单描述，例如itunes那个简介)
 content:string（详细的说明，包括曲包地址、相关视频微博地址等）
+thumbnail:string
 - belongs_to :show
 - has_many :timelines, dependent: :destroy
 - has_many :cards, through: "timelines"

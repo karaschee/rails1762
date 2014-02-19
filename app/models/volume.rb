@@ -4,6 +4,8 @@ class Volume < ActiveRecord::Base
   has_many :cards, through: :timelines
   # has_many :volume_tags
   # has_many :tags, through: "volume_tags"
+
+  mount_uploader :thumbnail, VolImageUploader
   
   validates :show_id,  presence: true
   validates :title,  presence: true, uniqueness: { scope: :show_id }

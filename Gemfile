@@ -11,6 +11,7 @@ gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'will_paginate', '3.0.4'
 gem 'kaminari'
+gem 'carrierwave'
 
 
 group :development, :test do
