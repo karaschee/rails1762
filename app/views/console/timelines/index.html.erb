@@ -92,7 +92,10 @@
 <script type="text/template" id="j_cardTemplate">
   <td>[%= card_type_name %]</td>
   <td>[%= title %]</td>
-  <td> <button type="button" class="btn btn-xs btn-info j_addCard">添加</button> </td>
+  <td>
+    <a href="/console/cards/[%= id %]/edit" target="_blank" class="btn btn-xs btn-info">编辑</a>
+    <button type="button" class="btn btn-xs btn-primary j_addCard">添加</button>
+  </td>
 </script>
 
 <%= content_for :stylesheets do %>
