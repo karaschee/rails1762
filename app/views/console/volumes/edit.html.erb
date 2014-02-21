@@ -1,10 +1,1 @@
-<p class="lead">
-  编辑节目 - <%= @volume.title %>
-</p>
-<%= render partial: 'console/shared/errors', locals: { object: @volume } %>
-<%= form_for @volume, url: console_volume_path(@volume), method: :patch do |f| %>
-  <%= render partial: 'form', locals: { f: f } %>
-  <div class="form-group">
-    <button type="submit" class="btn btn-primary">编辑</button>
-  </div>
-<% end %>
+<%= render 'form' %>

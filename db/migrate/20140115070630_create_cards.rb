@@ -4,7 +4,7 @@ class CreateCards < ActiveRecord::Migration
       t.integer :card_type_id
       t.string :title
       t.string :desc
-      t.string :content
+      t.text :content
 
       t.timestamps
     end

@@ -1,10 +1,11 @@
 # encoding: utf-8
+# require 'carrierwave/processing/minimagick'
 
-class VolImageUploader < CarrierWave::Uploader::Base
-
+class ImageUploader < CarrierWave::Uploader::Base
+  # require 'carrierwave/processing/mini_magick'
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -32,9 +33,25 @@ class VolImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process :scale => [50, 50]
-  # end
+  version :thumb_hs do
+    process :resize_to_fill => [80, 60]
+  end
+
+  version :thumb_hm do
+    process :resize_to_fill => [120, 90]
+  end
+
+  version :thumb_hl do
+    process :resize_to_fill => [300, 225]
+  end
+
+  version :thumb_vm do
+    process :resize_to_fill => [90, 120]
+  end
+
+  version :thumb_vl do
+    process :resize_to_fill => [300, 400]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

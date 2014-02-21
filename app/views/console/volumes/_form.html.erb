@@ -1,25 +1,26 @@
-<div class="form-group">
-  <%= f.label :title, "标题*" %>
-  <%= f.text_field :title, class: "form-control" %>
-</div>
+<p class="lead">
+  <%= render_form_action(@volume) %>节目
+</p>
 
-<div class="form-group">
-  <%= f.label :show_id, "所属频道" %>
-  <%= f.select :show_id, options_from_collection_for_select(@shows, 'id', 'name', @from_show_id || f.object.show_id), { prompt: true }, class: "form-control" %>
-</div>
+<%= render partial: 'console/shared/errors', locals: { object: @volume } %>
 
-<div class="form-group">
-  <%= f.label :thumbnail, "配图" %>
-  <%= f.file_field :thumbnail, class: "form-control" %>
-</div>
+<%= simple_form_for([:console, @volume], html: { class: "form" }, defaults: { input_html: { class: 'form-control' } }) do |f| %>
+  <%= f.input :title, label: "标题" %>
+  <%= f.association :show, prompt: true, label: "所属频道" %>
 
-<div class="form-group">
-  <%= f.label :desc, "描述" %>
-  <%= f.text_area :desc, class: "form-control", rows: 5 %>
-</div>
+  <div class="form-group">
+    <%= f.label :thumbnail, "配图" %>
+    <div class="gc_formImgPreview">
+      <%= image_tag(f.object.thumbnail_url, class: "image-responsive") if f.object.thumbnail? %>
+      <%= f.hidden_field :thumbnail_cache %>
+    </div>
+    <%= f.file_field :thumbnail, class: "form-control" %>
+  </div>
 
-<div class="form-group">
-  <%= f.label :content, "内容" %>
-  <%= f.text_area :content, class: "form-control", rows: 12 %>
-</div>
+  <%= f.input :desc, label: "描述", as: :text, input_html: { rows: "10" } %>
+  <%= f.input :content, label: "内容", input_html: { rows: 12 } %>
 
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">编辑</button>
+  </div>
+<% end %>

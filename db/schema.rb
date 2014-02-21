@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140219073401) do
     t.integer  "card_type_id"
     t.string   "title"
     t.string   "desc"
-    t.string   "content"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20140219073401) do
     t.string   "resource"
     t.string   "title"
     t.string   "desc"
-    t.string   "content"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "thumbnail"
