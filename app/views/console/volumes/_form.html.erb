@@ -10,10 +10,12 @@
 
   <div class="form-group">
     <%= f.label :thumbnail, "配图" %>
-    <div class="gc_formImgPreview">
-      <%= image_tag(f.object.thumbnail_url, class: "image-responsive") if f.object.thumbnail? %>
-      <%= f.hidden_field :thumbnail_cache %>
-    </div>
+    <% if f.object.thumbnail? %>
+      <div class="gc_formImgPreview">
+        <%= image_tag(f.object.thumbnail_url, class: "image-responsive") %>
+      </div>
+    <% end %>
+    <%= f.hidden_field :thumbnail_cache %>
     <%= f.file_field :thumbnail, class: "form-control" %>
   </div>
 

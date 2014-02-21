@@ -2,6 +2,18 @@
 <%= render partial: 'console/shared/errors', locals: { object: @show } %>
 <%= simple_form_for([:console, @show], html: { class: "form" }, defaults: { input_html: { class: 'form-control' } }) do |f| %>
   <%= f.input :name, label: "频道名" %>
+
+  <div class="form-group">
+    <%= f.label :thumbnail, "配图" %>
+    <% if f.object.thumbnail? %>
+      <div class="gc_formImgPreview">
+        <%= image_tag(f.object.thumbnail_url, class: "image-responsive") %>
+      </div>
+    <% end %>
+    <%= f.hidden_field :thumbnail_cache %>
+    <%= f.file_field :thumbnail, class: "form-control" %>
+  </div>
+
   <%= f.input :desc, label: "描述", as: :text, input_html: { rows: "10" } %>
   <div class="form-group">
     <button type="submit" class="btn btn-primary"><%= render_form_action(@show) %></button>
