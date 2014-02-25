@@ -1,7 +1,7 @@
 # encoding: utf-8
 # require 'carrierwave/processing/minimagick'
 
-class ImageUploader < CarrierWave::Uploader::Base
+class ThumbImageUploader < CarrierWave::Uploader::Base
   # require 'carrierwave/processing/mini_magick'
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -14,7 +14,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/#{model.class.to_s.underscore}/#{model.thumb_imageable_type}/#{mounted_as}/#{model.id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -33,23 +33,23 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  version :thumb_hs do
+  version :hs do
     process :resize_to_fill => [80, 60]
   end
 
-  version :thumb_hm do
+  version :hm do
     process :resize_to_fill => [120, 90]
   end
 
-  version :thumb_hl do
+  version :hl do
     process :resize_to_fill => [300, 225]
   end
 
-  version :thumb_vm do
+  version :vm do
     process :resize_to_fill => [90, 120]
   end
 
-  version :thumb_vl do
+  version :vl do
     process :resize_to_fill => [300, 400]
   end
 

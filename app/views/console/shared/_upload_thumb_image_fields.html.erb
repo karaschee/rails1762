@@ -1,0 +1,13 @@
+<%= f.fields_for :thumb_image, f.object.thumb_image || f.object.build_thumb_image do |ft| %>
+  <div class="form-group">
+    <label>配图</label>
+    <% image = ft.object %>
+    <% if image.present? and image.asset? %>
+      <div class="gc_formImgPreview">
+        <%= image_tag(image.asset_url, class: "image-responsive") %>
+      </div>
+    <% end %>
+    <%= ft.hidden_field :asset_cache %>
+    <%= ft.file_field :asset, class: "form-control" %>
+  </div>
+<% end %>

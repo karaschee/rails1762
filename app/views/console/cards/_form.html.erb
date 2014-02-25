@@ -1,18 +1,11 @@
 <p class="lead"> <%= render_form_action(@card) %>资料卡 </p>
+
 <%= render partial: 'console/shared/errors', locals: { object: @card } %>
+
 <%= simple_form_for([:console, @card], html: { class: "form" }, defaults: { input_html: { class: 'form-control' } }) do |f| %>
   <%= f.input :title, label: "标题" %>
   
-  <div class="form-group">
-    <%= f.label :thumbnail, "配图" %>
-    <% if f.object.thumbnail? %>
-      <div class="gc_formImgPreview">
-        <%= image_tag(f.object.thumbnail_url, class: "image-responsive") %>
-      </div>
-    <% end %>
-    <%= f.hidden_field :thumbnail_cache %>
-    <%= f.file_field :thumbnail, class: "form-control" %>
-  </div>
+  <%= render :partial => "console/shared/upload_thumb_image_fields", locals: { f: f } %>
 
   <%= f.association :card_type, label: "所属类别", prompt: true %>
   <%= f.input :desc, label: "描述", as: :text %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140221092601) do
+ActiveRecord::Schema.define(version: 20140225071556) do
 
   create_table "card_types", force: true do |t|
     t.string   "name"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20140221092601) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "thumbnail"
   end
 
   create_table "shows", force: true do |t|
@@ -35,7 +34,14 @@ ActiveRecord::Schema.define(version: 20140221092601) do
     t.string   "desc"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "thumbnail"
+  end
+
+  create_table "thumb_images", force: true do |t|
+    t.string   "asset"
+    t.integer  "thumb_imageable_id"
+    t.string   "thumb_imageable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "timelines", force: true do |t|
@@ -54,7 +60,6 @@ ActiveRecord::Schema.define(version: 20140221092601) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "thumbnail"
   end
 
 end

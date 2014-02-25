@@ -57,7 +57,7 @@ class Console::VolumesController < Console::ConsoleBaseController
     end
 
     def volume_params
-      params.require(:volume).permit(:title, :desc, :show_id, :thumbnail, :content)
+      params.require(:volume).permit(:title, :desc, :show_id, :thumbnail, :content, thumb_image_attributes: [:asset])
     end
 
     def get_shows
