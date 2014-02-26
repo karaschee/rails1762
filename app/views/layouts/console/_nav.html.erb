@@ -1,0 +1,20 @@
+<div class="list-group">
+  <%= link_to "频道", console_shows_path, class: "list-group-item" %>
+  <%= link_to "新增频道", new_console_show_path, class: "list-group-item" %>
+</div>
+<div class="list-group">
+  <%= link_to "节目", console_volumes_path, class: "list-group-item" %>
+  <% if content_for?(:new_volume) %>
+    <%= yield :new_volume %>
+  <% else %>
+    <%= link_to "新增节目", new_console_volume_path, class: "list-group-item" %>
+  <% end %>
+</div>
+<div class="list-group">
+  <%= link_to "资料卡", console_cards_path, class: "list-group-item" %>
+  <%= link_to "新增资料卡", new_console_card_path, class: "list-group-item" %>
+</div>
+<div class="list-group">
+  <%= link_to "资料卡分类", console_card_types_path, class: "list-group-item" %>
+  <%= link_to "新增资料卡分类", new_console_card_type_path, class: "list-group-item" %>
+</div>

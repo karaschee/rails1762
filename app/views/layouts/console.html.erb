@@ -4,56 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rails1762</title>
+
+  <!-- Stylesheets -->
   <%= stylesheet_link_tag "console", media: "all", "data-turbolinks-track" => true %>
   <%= render partial: "layouts/specific_css" %>
   <%= yield :stylesheets %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <header class="navbar navbar-default" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#t_navbarCollapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button> 
-        <a class="navbar-brand" href="#">1762后台</a>
-      </div>
-
-      <nav class="collapse navbar-collapse" role="navigation" id="t_navbarCollapse">
-        <p class="navbar-text">控制器</p>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">回到主站</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <%= render 'layouts/console/header' %>
 
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-2" role="navigation">
-        <div class="list-group">
-          <%= link_to "频道", console_shows_path, class: "list-group-item" %>
-          <%= link_to "新增频道", new_console_show_path, class: "list-group-item" %>
-        </div>
-        <div class="list-group">
-          <%= link_to "节目", console_volumes_path, class: "list-group-item" %>
-          <% if content_for?(:new_volume) %>
-            <%= yield :new_volume %>
-          <% else %>
-            <%= link_to "新增节目", new_console_volume_path, class: "list-group-item" %>
-          <% end %>
-        </div>
-        <div class="list-group">
-          <%= link_to "资料卡", console_cards_path, class: "list-group-item" %>
-          <%= link_to "新增资料卡", new_console_card_path, class: "list-group-item" %>
-        </div>
-        <div class="list-group">
-          <%= link_to "资料卡分类", console_card_types_path, class: "list-group-item" %>
-          <%= link_to "新增资料卡分类", new_console_card_type_path, class: "list-group-item" %>
-        </div>
+        <%= render 'layouts/console/nav' %>
       </div>
 
       <div class="col-xs-12 col-sm-10">
