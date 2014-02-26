@@ -1,0 +1,11 @@
+//= require ./epiceditor.min
+
+EpicEditor._assetPrepareOptions = {
+  clientSideStorage: false,
+  basePath: "",
+  theme: {
+    base: "<%= asset_path 'epiceditor/0.2.2/themes/base/epiceditor.css' %>",
+    preview: "<%= asset_path 'epiceditor/0.2.2/themes/preview/github.css' %>",
+    editor: "<%= asset_path 'epiceditor/0.2.2/themes/editor/epic-dark.css' %>"
+  }
+}

@@ -21,7 +21,9 @@ class Console::ShowsController < Console::ConsoleBaseController
     if @show.save
       redirect_to console_shows_path
     else
-      render :new
+      # render :new
+      redirect_to new_console_show_url
+
     end
   end
 
@@ -45,6 +47,6 @@ class Console::ShowsController < Console::ConsoleBaseController
     end
 
     def show_params
-      params.require(:show).permit(:name, :desc, thumb_image_attributes: [:asset])
+      params.require(:show).permit(:name, :desc, :content, thumb_image_attributes: [:asset])
     end
 end

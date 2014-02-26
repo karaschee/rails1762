@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140225071556) do
   create_table "shows", force: true do |t|
     t.string   "name"
     t.string   "desc"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

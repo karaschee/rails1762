@@ -14,7 +14,7 @@ gem 'kaminari'
 gem 'mini_magick'
 gem 'carrierwave'
 gem 'simple_form'
-
+gem 'redcarpet'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'

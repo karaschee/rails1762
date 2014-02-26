@@ -7,8 +7,22 @@
 
   <%= render :partial => "console/shared/upload_thumb_image_fields", locals: { f: f } %>
 
-  <%= f.input :desc, label: "描述", as: :text, input_html: { rows: "10" } %>
+  <%= f.input :desc, label: "描述", as: :text, input_html: { rows: "5" } %>
+
+  <div class="form-group">
+    <label>内容</label>
+    <div id="epiceditor">
+      <%= f.text_area :content, rows: "12", class: "form-control" %>
+    </div>
+  </div>
+  <%#= f.input :content, label: "内容", input_html: { rows: "10" } %>
+
   <div class="form-group">
     <button type="submit" class="btn btn-primary"><%= render_form_action(@show) %></button>
   </div>
+<% end %>
+
+<%= content_for :javascripts do %>
+  <script type="text/javascript">     
+  </script>
 <% end %>
