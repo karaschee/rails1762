@@ -1,0 +1,20 @@
+/* karaschee.tinytip style module */
+
+.tinytip_wrapper {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  margin-left: -75px;
+  width: 154px;
+  padding: 10px 10px 10px 30px;
+  font-weight: bold;
+  font-size: 12px;
+  color: #666;
+  background: url("loading.gif") 10px 50% no-repeat #eee;
+  border: 1px solid #ddd;
+  border-top: 1px solid #fff;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  z-index: 20;
+}
