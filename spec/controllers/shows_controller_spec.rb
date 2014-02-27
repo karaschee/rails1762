@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CardsController do
+describe ShowsController do
 
   describe "GET 'index'" do
     it "returns http success" do
