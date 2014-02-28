@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G-cores Fan Club</title>
+
+  <!-- Stylesheets -->
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= render partial: "layouts/specific_css" %>
+  <%= yield :stylesheets %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  test application
+  <%= yield %>
+  
+  <!-- Javascripts -->
+  <script type="text/javascript">
+    _TOKEN_ = "<%= form_authenticity_token %>";
+  </script>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= yield :prepare_javascripts %>
+  <%= render partial: "layouts/specific_js" %>
+  <%= yield :javascripts %>
+</body>
+</html>

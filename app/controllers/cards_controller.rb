@@ -1,4 +1,4 @@
-class CardsController < ApplicationController
+class CardsController < BaseController
   def show
     @card = Card.find(params[:id])
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)

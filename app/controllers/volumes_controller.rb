@@ -1,4 +1,4 @@
-class VolumesController < ApplicationController
+class VolumesController < BaseController
   def index
   end
 
