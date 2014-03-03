@@ -13,13 +13,34 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  test application
-  <%= yield %>
+  <%= render "layouts/application/header" %>  
+
+  <div class="g_wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3" role="navigation">
+          <!-- <div style="height:200px; background:red;" ></div> -->
+          <%= render 'layouts/application/sidebar' %>
+        </div>
+
+        <div class="col-sm-9">
+          <!-- <div style="height:200px; background:blue;" ></div> -->
+          <% flash.each do |key, value| %>
+            <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+          <% end %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© Company 2014</p>
+    </div>
+  </footer>
   
   <!-- Javascripts -->
-  <script type="text/javascript">
-    _TOKEN_ = "<%= form_authenticity_token %>";
-  </script>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= yield :prepare_javascripts %>
   <%= render partial: "layouts/specific_js" %>

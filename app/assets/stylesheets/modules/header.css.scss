@@ -1,0 +1,33 @@
+.g_header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 20px;
+  background: #313130;
+
+  .g_header_main {
+    position: relative;
+    padding-left: 280px;
+  }
+
+  .g_logo {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+
+    a.g_logo_img {}
+  }
+
+  .g_nav {
+    overflow: hidden;
+    line-height: 50px;
+    font-size: 16px;
+    li {
+      float: left;
+      padding: 0 10px;
+    }
+  }
+}
