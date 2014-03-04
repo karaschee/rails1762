@@ -4,6 +4,10 @@
  *= require_self
  */
 
+body {
+  height: 2000px;
+}
+
 .g_wrapper {
-  padding-top: 100px;
+  padding-top: 150px;
 }

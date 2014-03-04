@@ -1,10 +1,12 @@
 .g_header {
   position: fixed;
+  z-index: 1;
   top: 0;
   left: 0;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 50px;
   background: #313130;
+  transition: all .2s ease 0;
 
   .g_header_main {
     position: relative;
@@ -15,28 +17,155 @@
     position: absolute;
     bottom: -20px;
     left: 0;
-    width: 100%;
-    padding: 10px;
+    padding: 0;
+    margin: 0;
 
-    a.g_logo_img {}
+    a.g_logo_img {
+      display: block;
+      width: 245px;
+      height: 100px;
+      background: asset-url('logo.png') 0 0 no-repeat;
+      transition: background .3s ease 0;
+      &:hover {
+        background: asset-url('logo-hover.png') 0 0 no-repeat;
+        div {
+          display: block;
+        }
+      }
+    }
+
+    a.g_logo_img-tiny {
+      display: none;
+    }
   }
 
   .g_nav {
     overflow: hidden;
     line-height: 50px;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
 
     ul {
+      font-family: "Microsoft YaHei", sans-serif; 
       list-style: none;
+      margin: 0;
     } 
 
     li {
       float: left;
-      padding: 0 10px;
-
+      padding: 0 25px;
+      &.current {
+        a {
+          color: #fff;
+          border-bottom: 10px solid #fff;
+        }
+      }
       a {
-        color: #fff;
+        padding: 10px 5px;
+        color: #bfbfbf;
+        &:hover {
+          text-decoration: none;
+          color: #fff;
+        }
       }
     }
+  }
+}
+
+.g_header-scroll {
+  padding-top: 0px;
+  // transition: all .3s ease 0;
+
+  .g_header_main {
+    padding-left: 197px;
+  }
+
+  .g_logo {
+    bottom: 0;
+    a.g_logo_img {
+      display: none;
+    }
+    a.g_logo_img-tiny {
+      display: block;
+      width: 197px;
+      height: 50px;
+      background: asset-url('header-logo-tiny.png')
+    }
+  }
+
+  .g_nav {
+    line-height: 50px;
+    font-size: 16px;
+  }
+}
+
+.g_headerMobile {
+  position: relative;
+  display: none;
+  height: 50px;
+  line-height: 55px;
+  background: #313130;
+  color: #fff;
+
+  a.g_headerMobile_logo {
+    float: left;
+    height: 50px;
+    width: 197px;
+    background: asset-url('header-logo-tiny.png') 0 0 no-repeat;
+  }
+
+  a.g_headerMobile_navBtn {
+    float: right;
+    padding: 0 10px;
+    margin-right: 5px;
+    color: #bfbfbf;
+    font-size: 18px;
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  nav.g_headerMobile_nav {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    background: #313130;
+    width: 100%;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      line-height: 1.4;
+    }
+    li {
+      margin: 0;
+      padding: 0;
+      &:first-child a {
+        border-top: 1px solid #222;
+      }
+    }
+    li a {
+      display: block;
+      padding: 10px 20px;
+      border-bottom: 1px solid #222;
+      color: #fff;
+      &:hover {
+        background: #454545;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .g_headerMobile {
+    display: block;
+  }
+  .g_header {
+    display: none;
+  }
+  .g_wrapper {
+    padding-top: 20px !important;
   }
 }
