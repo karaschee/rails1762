@@ -1,13 +1,4 @@
 /*
  *= require bootstrap
- *= require ./modules/header
- *= require_self
+ *= require ./modules/application
  */
-
-body {
-  height: 2000px;
-}
-
-.g_wrapper {
-  padding-top: 150px;
-}
