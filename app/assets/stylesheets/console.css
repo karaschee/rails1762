@@ -26,3 +26,7 @@ textarea {
   padding: 10px;
   border: 1px solid #ccc;
 }
+.gc_formImgPreview img {
+  max-width: 100%;
+  max-height: 100%;
+}

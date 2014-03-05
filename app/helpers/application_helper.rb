@@ -33,4 +33,8 @@ module ApplicationHelper
 #        include_related_asset 'path/to/module.js'
     end
   end
+
+  def latest_vol
+    Volume.first
+  end
 end

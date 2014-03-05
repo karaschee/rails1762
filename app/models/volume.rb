@@ -13,4 +13,8 @@ class Volume < ActiveRecord::Base
   def belonged_show
     show.present? ? show.name : "无"
   end
+
+  def show_no
+    no.nil? ? 'special' : "vol.#{no}"
+  end
 end

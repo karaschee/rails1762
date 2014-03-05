@@ -33,24 +33,24 @@ class ThumbImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
+
+  # horizon
   version :hs do
-    process :resize_to_fill => [80, 60]
+    process :resize_to_fill => [80, 40]
   end
-
   version :hm do
-    process :resize_to_fill => [120, 90]
+    process :resize_to_fill => [300, 150]
   end
-
   version :hl do
-    process :resize_to_fill => [300, 225]
+    process :resize_to_fill => [600, 300]
   end
 
-  version :vm do
-    process :resize_to_fill => [90, 120]
+  # square
+  version :ss do
+    process :resize_to_fill => [80, 80]
   end
-
-  version :vl do
-    process :resize_to_fill => [300, 400]
+  version :sm do
+    process :resize_to_fill => [180, 180]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

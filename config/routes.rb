@@ -1,13 +1,4 @@
 Rails1762::Application.routes.draw do
-
-  get "volumes/index"
-  get "volumes/show"
-  get "shows/index"
-  get "shows/show"
-  get "card_types/index"
-  get "card_types/show"
-  get "cards/index"
-  get "cards/show"
   namespace :console do
     resources :shows
 
@@ -36,7 +27,7 @@ Rails1762::Application.routes.draw do
   end
   resources :volumes, only: [:index, :show]
 
-  root 'shows#index'
+  root 'pages#home'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

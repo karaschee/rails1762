@@ -4,6 +4,7 @@
 
 <%= simple_form_for([:console, @volume], html: { class: "form" }, defaults: { input_html: { class: 'form-control' } }) do |f| %>
   <%= f.input :title, label: "标题" %>
+  <%= f.input :no, label: "期数" %>
   <%= f.association :show, prompt: true, label: "所属频道" %>
 
   <%= render :partial => "console/shared/upload_thumb_image_fields", locals: { f: f } %>

@@ -1,6 +1,7 @@
 <%= content_for :stylesheets do %>
   <style type="text/css">
     .media { margin-top: 50px !important; }
+    .media-heading a { text-decoration: none; }
 
     .media>.pull-left {
       margin-right: 20px;
@@ -9,21 +10,46 @@
 <% end %>
 
 <div class="page-header">
-  <h1>目前机核网共推出4档频道 <small>Enjoy yourself!</small></h1>
+  <h1>目前本站收录机核网推出的 <%= @shows.size %> 档频道 <small>Enjoy yourself!</small></h1>
 </div>
 
 <div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <% [1,2,3].each do %>
+  <div class="col-md-8">
+    <% @shows.each do |show| %>
+      <% 
+        first_vol = show.volumes.first
+        img_tag = image_tag image_url(show.thumb_image.asset.ss.url), class: "media-object img-circle"
+      %>
       <div class="media">
-        <a class="pull-left" href="#">
-          <img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjZWVlIj48L3JlY3Q+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMzIiIHk9IjMyIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9zdmc+" style="width: 64px; height: 64px;">
-        </a>
+        <% if first_vol.nil? %>
+          <div class="pull-left">
+            <%= img_tag %>
+          </div>
+        <% else %>
+          <%= link_to volume_url(first_vol), class: "pull-left" do %>
+            <%= img_tag %>
+          <% end %>
+        <% end %>
+
         <div class="media-body">
-          <h4 class="media-heading">Media heading</h4>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+          <h4 class="media-heading">
+            <strong>
+              <% if first_vol.nil? %>
+                <%= show.name %>
+              <% else %>
+                <%= link_to volume_url(first_vol) do %>
+                  <%= show.name %> <small> / <%= first_vol.show_no %> <%= first_vol.title %> </small>
+                <% end %>
+              <% end %>
+            </strong>
+          </h4>
+          <p><%= show.desc %></p>
         </div>
       </div>
     <% end %>
+  </div>
+
+  <div class="col-md-offset-1 col-md-3">
+    
   </div>
 </div>
