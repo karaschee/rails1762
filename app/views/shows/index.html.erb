@@ -18,7 +18,7 @@
     <% @shows.each do |show| %>
       <% 
         first_vol = show.volumes.first
-        img_tag = image_tag image_url(show.thumb_image.asset.ss.url), class: "media-object img-circle"
+        img_tag = image_tag thumb_image_path(show), class: "media-object img-circle"
       %>
       <div class="media">
         <% if first_vol.nil? %>

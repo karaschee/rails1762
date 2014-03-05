@@ -37,4 +37,17 @@ module ApplicationHelper
   def latest_vol
     Volume.first
   end
+
+  def thumb_image_path(belongto, version=:ss)
+    begin
+      url = belongto.thumb_image.asset_url(version)
+    rescue
+      url = ""
+    end
+    if url.present?
+      url
+    else
+      "/default_thumb_images/#{version}.jpg"
+    end
+  end
 end
