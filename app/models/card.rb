@@ -8,6 +8,7 @@ class Card < ActiveRecord::Base
   validates :title, presence: true, uniqueness: { scope: :card_type_id }
 
   def card_type_name
-    card_type.try(:name)
+    name = card_type.try(:name)
+    name.present? ? name : "无"
   end
 end

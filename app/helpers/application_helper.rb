@@ -7,12 +7,12 @@ module ApplicationHelper
     end
   end
 
-  def if_data_present(data, is_show = nil, &block)
+  def if_data_present(data, args={is_show: nil, tip: "没有相关数据。"}, &block)
     content = capture(&block)
-    if is_show.nil? ? data.present? : is_show 
+    if args[:is_show].nil? ? data.present? : args[:is_show] 
       content
     else
-      content_tag(:p, "没有相关数据。")
+      content_tag(:p, args[:tip])
     end
   end
 
@@ -40,7 +40,11 @@ module ApplicationHelper
 
   def thumb_image_path(belongto, version=:ss)
     begin
-      url = belongto.thumb_image.asset_url(version)
+      if version == :origin
+        url = belongto.thumb_image.asset_url
+      else
+        url = belongto.thumb_image.asset_url(version)
+      end
     rescue
       url = ""
     end

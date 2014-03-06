@@ -16,6 +16,7 @@
   <%= render "layouts/application/header" %>  
 
   <div class="g_wrapper">
+    <%= yield :wrapper_before %>
     <div class="container">
       <% flash.each do |key, value| %>
         <%= content_tag(:div, value, class: "alert alert-#{key}") %>
@@ -29,6 +30,7 @@
     <div class="container text-right">
       <p>本站为机核网非官方粉丝站</p>
       <p>All Rights Reserved 2009-2014 Game Cores</p>
+      <p>Powered by Bootstrap</p>
     </div>
   </footer>
   

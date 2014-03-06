@@ -1,2 +1,46 @@
-<h1>Cards#show</h1>
-<p>Find me in app/views/cards/show.html.erb</p>
+<%= content_for :wrapper_before do %>
+  <div class="gcd_header">
+    <div class="gcd_header_hr"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="gcd_header_thumb">
+            <%= image_tag thumb_image_path(@card, :origin)%>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="gcd_header_info">
+            <h2><%= @card.title %></h2>
+            <% if @card.card_type.nil? %>
+              <p>所属类别：无</p>
+            <% else %>
+              <p>所属类别：<%= link_to @card.card_type_name, cards_url, class: "label label-primary" %></p>
+            <% end %>
+            <p class="gcd_header_info_desc"><%= @card.desc %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col-md-4">
+    <%= if_data_present(@vols, tip: "该wiki没有相关节目") do %>
+      <div class="list-group">
+        <% @vols.each do |vol| %>
+          <%= link_to volume_url(vol), class: "list-group-item" do %>
+            <span class="<%= vol.show.label_class %>"><%= vol.show.name %></span>
+            <span class="label label-info"><%= vol.show_no %></span> &nbsp;
+            <%= vol.title %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-8">
+    <section>
+      <%= @card_content %>
+    </section>
+  </div>
+</div>

@@ -49,7 +49,24 @@
     <% end %>
   </div>
 
-  <div class="col-md-offset-1 col-md-3">
-    
+  <div class="col-md-4">
+    <h3>机核当家主播</h3>
+    <ul class="list-unstyled g_djWall">
+      <% @djs.each do |dj| %>
+        <li>
+          <%= link_to card_url(dj), class: "j_djthumb", "data-toggle" => "tooltip", "data-placement" => "top", title: "#{dj.title}" do %>
+            <%= image_tag thumb_image_path(dj), class: "img-thumbnail" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>
+
+<%= content_for :javascripts do %>
+  <script type="text/javascript">
+    $(function(){
+      $('.j_djthumb').tooltip();
+    });
+  </script>
+<% end %>
