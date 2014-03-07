@@ -1,0 +1,23 @@
+.g_sideNav {
+  padding: 10px 0;
+  border-right: 1px solid $gGraySS;
+  text-align: right;
+  a {
+    display: block;
+    color: $gGray;
+    padding: 5px 25px 5px 0;
+    transition: all .1s ease 0;
+    &:hover {
+      color: $gGrayS;
+      padding-right: 15px;
+      text-decoration: none;
+    }
+  }
+  li.active a {
+    border-right: 3px solid $gGray;
+    padding: 0 10px 0 0;
+    margin: 5px 0;
+    font-weight: bold;
+    color: $gBlack;
+  }
+}

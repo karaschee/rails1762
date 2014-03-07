@@ -14,9 +14,9 @@
           <div class="gcd_header_info">
             <h2><%= @card.title %></h2>
             <% if @card.card_type.nil? %>
-              <p>所属类别：无</p>
+              <p>所属类别：无，<%= link_to "查看所有wiki", card_types_url, class: "label label-primary" %></p>
             <% else %>
-              <p>所属类别：<%= link_to @card.card_type_name, cards_url, class: "label label-primary" %></p>
+              <p>所属类别：<%= link_to @card.card_type_name, card_type_cards_url(@card.card_type), class: "label label-primary" %></p>
             <% end %>
             <p class="gcd_header_info_desc"><%= @card.desc %></p>
           </div>

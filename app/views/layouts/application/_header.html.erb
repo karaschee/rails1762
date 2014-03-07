@@ -14,7 +14,7 @@
   <div class="container">
     <div class="g_header_main">
       <h1 class="g_logo">
-        <a href="#" class="g_logo_img">
+        <%= link_to volume_url(latest_vol), class: "g_logo_img" do %>
           <div class="g_logo_img_hover">
             <p>
               <span class="label label-primary"><%= latest_vol.show.name %></span>
@@ -23,14 +23,14 @@
             <span class="glyphicon glyphicon-music"></span>
             <%= latest_vol.title %>
           </div> 
-        </a>
+        <% end %>
 
-        <a href="#" class="g_logo_img-tiny">
+        <%= link_to volume_url(latest_vol), class: "g_logo_img-tiny" do %>
           <span>
             <%= latest_vol.show.name %> <br>
             <%= latest_vol.show_no %>
           </span>
-        </a>
+        <% end %>
       </h1>
 
       <nav class="g_nav">

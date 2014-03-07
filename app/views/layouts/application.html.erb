@@ -15,7 +15,7 @@
 <body>
   <%= render "layouts/application/header" %>  
 
-  <div class="g_wrapper">
+  <section class="g_wrapper">
     <%= render partial: "layouts/application/page_header" if content_for?(:main_title) or content_for?(:sub_title) %>
     <%= yield :wrapper_before %>
     <div class="container">
@@ -24,7 +24,7 @@
       <% end %>
       <%= yield %>
     </div>
-  </div>
+  </section>
 
   <footer class="g_footer">
     <hr>

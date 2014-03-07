@@ -1,2 +1,3 @@
 g: g-cores
-gcd: g-cores card
+gcd: g-cores(family) card(page)
+gp: g-cores(family) player(app)

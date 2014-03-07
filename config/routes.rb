@@ -20,7 +20,9 @@ Rails1762::Application.routes.draw do
     end
   end
 
-  resources :shows, only: [:index, :show]
+  resources :shows, only: [:index, :show] do
+    resources :volumes, only: [:show]
+  end
   resources :cards, only: [:show, :index]
   resources :card_types, only: [:index] do
     resources :cards, only: [:index]
