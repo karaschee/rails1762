@@ -21,3 +21,32 @@
     color: $gBlack;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .row {
+    .g_sideNav {
+      border-right: none;
+      border-left: 1px solid $gGraySS;
+      text-align: left;
+      a {
+        display: block;
+        color: $gGray;
+        padding: 5px 0 5px 25px;
+        transition: all .1s ease 0;
+        &:hover {
+          color: $gGrayS;
+          padding-left: 15px;
+          text-decoration: none;
+        }
+      }
+      li.active a {
+        border-right: none;
+        border-left: 3px solid $gGray;
+        padding: 0 0 0 10px;
+        margin: 5px 0;
+        font-weight: bold;
+        color: $gBlack;
+      }
+    }
+  }
+}
