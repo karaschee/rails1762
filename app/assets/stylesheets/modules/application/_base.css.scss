@@ -3,7 +3,7 @@ body {
 }
 
 .g_wrapper {
-  padding-top: 150px;
+  padding-top: 130px;
 }
 
 .g_djWall {
@@ -60,6 +60,46 @@ body {
     }
     p.gcd_header_info_desc {
       color: $gGrayS;
+    }
+  }
+}
+
+.g_cardtype {
+  margin: 10px 0 20px;
+  padding: 10px 0px 0;
+  border: 1px solid $gGraySS;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.23);
+  h3, p, .g_cardtype_cards {
+    padding: 0 20px;
+  }
+  hr {
+    width: 65%;
+    margin: 20px auto;
+    // border-bottom: 1px solid $gGraySS;
+  }
+  p {
+    font-size: 12px; 
+    line-height: 21px;
+    height: 63px;
+    overflow: hidden;
+  }
+  .g_cardtype_cards {
+    box-sizing: content-box;
+    background: #f4f4f4;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 0;
+    height: 110px;
+    overflow: hidden;
+    li {
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    img {
+      width: 50px;
+      height: 50px;
     }
   }
 }

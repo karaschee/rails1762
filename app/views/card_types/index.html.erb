@@ -1,2 +1,31 @@
-<h1>CardTypes#index</h1>
-<p>Find me in app/views/card_types/index.html.erb</p>
+<% content_for :main_title, "机核Wiki" %>
+<% content_for :sub_title, "这里记录了电台节目中出现过的部分资料" %>
+
+<div class="row">
+  <% @cardtypes.each do |ct| %>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="g_cardtype">
+        <h3><%= link_to ct.name, card_type_cards_url(ct) %></h3>
+        <hr>
+        <p><%= ct.desc %></p>
+        <ul class="g_cardtype_cards clearfix list-unstyled">
+          <% ct.cards.all[0..10].each do |c| %>
+            <li>
+              <%= link_to card_url(c) do %>
+                <%= image_tag thumb_image_path(c), class: "j_card media-object img-circle", "data-toggle" => "tooltip", "data-placement" => "top", title: "#{c.title}" %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= content_for :javascripts do %>
+  <script type="text/javascript">
+    $(function(){
+      $('.j_card').tooltip();
+    });
+  </script>
+<% end %>

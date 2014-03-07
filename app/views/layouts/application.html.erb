@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>G-cores Fan Club</title>
+  <title><%= content_for?(:main_title) ? yield(:main_title)+" | " : "" %>G-cores Fan Club</title>
 
   <!-- Stylesheets -->
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
@@ -16,6 +16,7 @@
   <%= render "layouts/application/header" %>  
 
   <div class="g_wrapper">
+    <%= render partial: "layouts/application/page_header" if content_for?(:main_title) or content_for?(:sub_title) %>
     <%= yield :wrapper_before %>
     <div class="container">
       <% flash.each do |key, value| %>

@@ -9,9 +9,8 @@
   </style>
 <% end %>
 
-<div class="page-header">
-  <h1>目前本站收录机核网推出的 <%= @shows.size %> 档频道 <small>Enjoy yourself!</small></h1>
-</div>
+<% content_for :main_title, "目前本站收录机核网推出的 #{@shows.size} 档频道" %>
+<% content_for :sub_title, "Enjoy yourself!" %>
 
 <div class="row">
   <div class="col-md-8">
