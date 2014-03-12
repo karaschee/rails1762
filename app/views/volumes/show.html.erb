@@ -30,12 +30,28 @@
 
 <%= content_for :javascripts do %>
   <script type="text/javascript">
-    $(function(){
+    // onload for the iscroll, it must get all width and height
+    window.onload = function(){
       var listCards = $('#j_cards');
       var itemsCards = listCards.find('li');
 
       var timeline = <%= @timelines.map { |t| t.at_time } %>;
       var currentTime;
+
+      // scorllbar init
+      var iscrollconfig = {
+        scrollbars: true,
+        mouseWheel: true,
+        interactiveScrollbars: true,
+        shrinkScrollbars: 'scale',
+        fadeScrollbars: true
+      };
+
+      var sContainer = new IScroll('#j_container', iscrollconfig);
+      var sCards = new IScroll('#j_cardsContainer', iscrollconfig);
+      var sSide = new IScroll('#j_sidebar', iscrollconfig);
+
+      document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
       // jplayer init
       $("#j_player").jPlayer({
@@ -63,7 +79,7 @@
           if( matchIndex !== -1 ){
             var currentItem = itemsCards.eq(matchIndex);
             currentItem.addClass('active').siblings().removeClass('active');
-            // currentItem.
+            sCards.scrollToElement(currentItem[0], 1200, null, true, IScroll.utils.ease.circular)
           }
         }
       });
@@ -77,6 +93,7 @@
         return -1;
       }
 
-    });
+
+    };
   </script>
 <% end %>

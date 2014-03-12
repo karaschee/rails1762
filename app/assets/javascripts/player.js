@@ -14,30 +14,17 @@ $(function(){
   var elemMain = $('.gp_wrapper').add('.gp_footerControl');
   var elemWaiting = $('.gp_waiting');
 
-  $(window).on('resize', function(){
+  function resizeWin(){
     var w = $(window);
     var wh = w.height();
     var rh = wh-toph-footerh;
     $('.gp_wrapper').height(rh);
-  });
+  }
+
+  $(window).on('resize', resizeWin);
 
   elemWaiting.hide();
   elemMain.show();
 
-  $(window).trigger('resize');
-
-  // scorllbar init
-  var iscrollconfig = {
-    scrollbars: true,
-    mouseWheel: true,
-    interactiveScrollbars: true,
-    shrinkScrollbars: 'scale',
-    fadeScrollbars: true
-  };
-
-  var myScroll = new IScroll('#j_container', iscrollconfig);
-  var myScroll = new IScroll('#j_cardsContainer', iscrollconfig);
-  var myScroll = new IScroll('#j_sidebar', iscrollconfig);
-
-  document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+  resizeWin();
 });

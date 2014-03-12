@@ -33,6 +33,7 @@ body {
 .gp_sidebar, .gp_container, .gp_cards_container {
   height: 100%;
   overflow: hidden;
+  position: relative;
   // &:hover {
   //   overflow: auto;
   //   // padding-right: 0;
