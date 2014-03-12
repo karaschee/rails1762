@@ -8,3 +8,11 @@ $gGrayS: #808080;
 $gGraySS: #dadada;
 $gGrayEx: #eee;
 $gAboutWhite: #f8f8f8;
+
+@mixin vendor-prefix($name, $argument) {
+  -webkit-#{$name}: #{$argument};
+  -ms-#{$name}: #{$argument};
+  -moz-#{$name}: #{$argument};
+  -o-#{$name}: #{$argument};
+  #{$name}: #{$argument};
+}
