@@ -1,2 +1,82 @@
-<h1>Volumes#show</h1>
-<p>Find me in app/views/volumes/show.html.erb</p>
+<section>
+  <div class="gp_thumb">
+    <%= image_tag thumb_image_path(@vol, :hl), class: "" %>
+  </div>
+  <h1>
+    <%= @vol.title %>
+    <small>
+      <%= link_to @vol.resource do %>
+        <span class="glyphicon glyphicon-download-alt"></span> 下载
+      <% end %>
+    </small>
+  </h1>
+  <p>
+    <span class="label label-default">走心</span>
+    <span class="label label-default">技术帝</span>
+    <span class="label label-default">GTA5</span>
+    <span class="label label-default">GTA</span>
+  </p>
+  <p>
+    <blockquote>
+      <%= @vol.desc %>
+    </blockquote>
+  </p>
+  <section>
+    <%= @vol_content %>
+  </section>
+</section>
+
+<% content_for :main_title, "#{@vol.title}" %>
+
+<%= content_for :javascripts do %>
+  <script type="text/javascript">
+    $(function(){
+      var listCards = $('#j_cards');
+      var itemsCards = listCards.find('li');
+
+      var timeline = <%= @timelines.map { |t| t.at_time } %>;
+      var currentTime;
+
+      // jplayer init
+      $("#j_player").jPlayer({
+        ready: function () {
+          $(this).jPlayer("setMedia", {
+            mp3: "<%= @vol.resource %>"
+          });
+        },
+        cssSelectorAncestor: '#j_player_ui',
+        solution: 'flash, html',
+        swfPath: "/jplayer.swf",
+        supplied: "mp3",
+
+        // events
+        timeupdate: function(e){
+          // console.log(e.jPlayer.status.currentTime); // 250ms
+          // console.log(e.jPlayer.status.duration); // buffer
+          var time = parseInt(e.jPlayer.status.currentTime);
+          if(time === currentTime) return;
+
+          currentTime = time;
+
+          var matchIndex = getMatchIndex(currentTime);
+          console.log('match: '+matchIndex);
+          if( matchIndex !== -1 ){
+            var currentItem = itemsCards.eq(matchIndex);
+            currentItem.addClass('active').siblings().removeClass('active');
+            // currentItem.
+          }
+        }
+      });
+
+      function getMatchIndex(currentTime){
+        for(var i in timeline){
+          if(parseInt(currentTime) == timeline[i]){
+            return i;
+          }
+        }
+        return -1;
+      }
+
+    });
+  </script>
+<% end %>

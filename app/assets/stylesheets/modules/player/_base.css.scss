@@ -1,9 +1,315 @@
+html, body {
+  height: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
 body {
-  padding: 50px;
+  min-width: 960px;
+}
+
+.gp_wrapper {
+  display: none;
+  // padding: 20px;
+  // background: $gAboutWhite;
+}
+
+.gp_waiting {
+  padding: 100px;
+  text-align: center;
+  color: $gGrayS;
+  font-size: 12px;
+}
+
+.gp_thumb {
+  text-align: center;
+  padding: 0 0 20px;
+  border-bottom: 1px solid $gGraySS;
+  img {
+    max-width: 100%;
+  }
+}
+
+.gp_sidebar, .gp_container, .gp_cards_container {
+  height: 100%;
+  overflow: hidden;
+  // &:hover {
+  //   overflow: auto;
+  //   // padding-right: 0;
+  // }
+}
+
+.gp_cards_container {
+  width: 220px;
+  float: right;
+  background: $gAboutWhite;
+  padding: 0 15px;
+  .inner {
+    padding: 20px 0;
+  }
+}
+.gp_cards {
+  $lh: 21px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 12px;
+  li {
+    opacity: .5;
+    margin-bottom: 20px;
+    &.active {
+      opacity: 1;
+    }
+  }
+  p {
+    line-height: $lh;
+    margin: 5px 0 5px;
+    overflow: hidden;
+  }
+  .gp_cards_img {
+    position: relative;
+    .label {
+      position: absolute;
+      top: 7px;
+      left: 22px;
+    }
+  }
+  .gp_cards_title {
+    font-weight: bold;
+    height: $lh;
+  }
+  .gp_cards_desc {
+    height: $lh*2;
+  }
+  a {
+    color: $gGrayS;
+    &:hover {
+      color: $gGray;
+      text-decoration: none;
+    }
+  }
 }
 
 .gp_sidebar {
-  padding: 0 20px;
-  width: 260px;
+  padding: 0 15px 0 20px;
+  width: 200px;
   float: left;
+  .inner {
+    padding: 30px 0;
+  }
+  .g_sideNav  {
+    border: none;
+    a {
+      padding-right: 13px;
+    }
+  }
+
+  // // background: $gGrayEx;
+  // background: #202020;
+  // // background: $gAboutWhite;
+  // .g_sideNav  {
+  //   border: none;
+  //   li.active {
+  //     a {
+  //       // color: $gBlack;
+  //       color: #fff;
+  //       border-right-color: #fff;
+  //     }
+  //   }
+  //   a {
+  //     // color: $gGrayS;
+  //     color: $gGraySS;
+  //     &:hover {
+  //       // color: $gGray;
+  //       color: $gGrayEx;
+  //     }
+  //   }
+  // }
+}
+
+.gp_container {
+  zoom: 1;
+  background: #fff;
+  .inner {
+    padding: 15px;
+  }
+}
+
+.gp_topbar {
+  $logoPlaceholder: 41px;
+  height: 50px;
+  padding: 0 10px;
+  border-bottom: 2px solid $gMainS;
+  line-height: 50px;
+  background: $gMain;
+
+  .gp_logo {
+    float: left;
+    width: $logoPlaceholder;
+    height: 30px;
+    margin: 10px 0 0 0;
+    padding: 0;
+    background: asset-url('logo-pure.png') 0 0 no-repeat;
+  }
+  .gp_nav {
+    overflow: hidden;
+    border-left: 1px solid #da5650;
+    // padding-left: $logoPlaceholder;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    li, a {
+      float: left;
+    }
+    a {
+      padding: 0 20px;
+      color: #fff;
+      &:hover {
+        color: $gGrayEx;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.gp_footerControl {
+  $lPlacehoder: 250px;
+  $rPlacehoder: 250px;
+  display: none;
+  position: relative;
+  height: 80px;
+  border-top: 1px solid $gGraySS;
+  background: #fff;
+
+  .gp_control_actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $lPlacehoder;
+    height: 100%;
+
+    .gp_play, .gp_pause, .gp_next, .gp_prev {
+      $size: 30px;
+      // border: 1px solid $gGrayS;
+      position: absolute;
+      top: 20px;
+      width: $size;
+      height: $size;
+      line-height: $size;
+      text-align: center;
+      color: $gMain;
+      &:hover {
+        color: #da5650;
+        text-decoration: none;
+      }
+      * {
+        vertical-align: middle;
+      }
+    }
+    .gp_next, .gp_prev {
+      font-size: 25px;
+    }
+    .gp_play, .gp_pause {
+      font-size: 30px;
+      left: 101px;
+    }
+    .gp_next {
+      left: 164px;
+    }
+    .gp_prev {
+      left: 38px;
+    }
+  }
+
+  .gp_control_sub {
+    position: absolute;
+    right: 0;
+    top: 45px;
+    height: 18px;
+    line-height: 22px;
+    padding: 0 30px 0 30px;
+    width: $rPlacehoder;
+    .gp_control_sub_volume {
+      height: 100%;
+      .gp_control_sub_volume_icon-mute, .gp_control_sub_volume_icon-unmute {
+        float: left;
+        width: 30px;
+        height: 100%;
+        font-size: 16px;
+        text-align: center;
+        color: $gBlack;
+      }
+      .gp_control_sub_volume_total {
+        height: 100%;
+        cursor: pointer;
+        overflow: hidden;
+        background: $gGrayEx;
+      }
+      .gp_control_sub_volume_val {
+        height: 100%;
+        background: $gGraySS;
+      }
+    }
+  }
+
+  .gp_control_progress {
+    $timePlacehoder: 60px;
+    position: relative;
+    margin: 0 $rPlacehoder 0 $lPlacehoder;
+    height: 100%;
+    padding-top: 15px;
+    font-size: 12px;
+    color: $gGrayS;
+
+    .gp_control_title {
+      font-size: 14px;
+      padding-left: $timePlacehoder;
+      span {
+        margin-right: 5px;
+      }
+    }
+
+    .gp_control_progressbar {
+      position: relative;
+      width: 100%;
+      height: 18px;
+      line-height: 18px;
+      // top: 37px;
+
+      .gp_control_progressbar_current, .gp_control_progressbar_duration {
+        position: absolute;
+        top: 0;
+        width: $timePlacehoder;
+        height: 100%;
+        text-align: center;
+      }
+      .gp_control_progressbar_current {
+        left: 0;
+      }
+      .gp_control_progressbar_duration {
+        right: 0;
+      }
+      .gp_control_progressbar_inner {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: $timePlacehoder;
+        right: $timePlacehoder;
+        height: 100%;
+        background: $gGrayEx;
+      }
+      .gp_control_progressbar_seek {
+        background: $gGraySS;
+        width: 100%;
+        height: 100%;
+      }
+      .gp_control_progressbar_play {
+        background: $gGrayS;
+        height: 100%;
+      }
+    }
+  }
 }

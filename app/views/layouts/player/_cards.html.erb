@@ -1,0 +1,22 @@
+<section class="gp_cards_container" id="j_cardsContainer">
+  <div class="inner">
+    <div class="gp_cards_actions">
+      
+    </div>
+    <ul class="gp_cards" id="j_cards">
+      <% @timelines.each do |t| %>
+        <% card = t.card %>
+        <li>
+          <%= link_to card_url(card), target: "_blank" do %>
+            <div class="gp_cards_img">
+              <span class="label label-info"><%= t.at_time %> ms</span>
+              <%= image_tag thumb_image_path(card), class: "img-thumbnail" %>
+            </div>
+            <p class="gp_cards_title"><%= card.title %></p>
+            <p class="gp_cards_desc"><%= card.desc %></p>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</section>

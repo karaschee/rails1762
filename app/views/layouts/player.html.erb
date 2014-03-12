@@ -7,27 +7,29 @@
 
   <!-- Stylesheets -->
   <%= stylesheet_link_tag "player", media: "all", "data-turbolinks-track" => true %>
-  <%= render partial: "layouts/specific_css" %>
-  <%= yield :stylesheets %>
+  <%= render 'layouts/stylesheets' %>
 
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render "layouts/player/header" %>  
+  <%= render "layouts/player/header" %>
 
-  <section class="g_wrapper">
+  <div class="gp_waiting">
+    载入中，请稍候
+  </div>  
+
+  <section class="gp_wrapper">
+    <%= render partial: "layouts/player/cards" %>
     <%= render partial: "layouts/player/side_nav" %>
-    <%= yield %>
+    <section class="gp_container" id="j_container">
+      <div class="inner"> <%= yield %> </div>
+    </section>
   </section>
 
-  <footer class="">
-
-  </footer>
+  <%= render "layouts/player/footer" %>  
   
   <!-- Javascripts -->
   <%= javascript_include_tag "player", "data-turbolinks-track" => true %>
-  <%= yield :prepare_javascripts %>
-  <%= render partial: "layouts/specific_js" %>
-  <%= yield :javascripts %>
+  <%= render 'layouts/javascripts' %>
 </body>
 </html>

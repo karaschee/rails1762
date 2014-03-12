@@ -7,8 +7,7 @@
 
   <!-- Stylesheets -->
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <%= render partial: "layouts/specific_css" %>
-  <%= yield :stylesheets %>
+  <%= render 'layouts/stylesheets' %>
 
   <%= csrf_meta_tags %>
 </head>
@@ -37,8 +36,6 @@
   
   <!-- Javascripts -->
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= yield :prepare_javascripts %>
-  <%= render partial: "layouts/specific_js" %>
-  <%= yield :javascripts %>
+  <%= render 'layouts/javascripts' %>
 </body>
 </html>

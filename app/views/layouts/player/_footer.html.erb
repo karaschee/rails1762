@@ -1,0 +1,38 @@
+<div id="j_player" class="jp-jplayer"></div>
+<footer id="j_player_ui" class="gp_footerControl">
+  <section class="gp_control_actions">
+    <a href="javascript:;" class="gp_play jp-play"><span class="glyphicon glyphicon-play"></span></a>
+    <a href="javascript:;" class="gp_pause jp-pause"><span class="glyphicon glyphicon-pause"></span></a>
+    <a href="javascript:;" class="gp_next"><span class="glyphicon glyphicon-forward"></span></a>
+    <a href="javascript:;" class="gp_prev"><span class="glyphicon glyphicon-backward"></span></a>
+  </section>
+  <section class="gp_control_sub">
+    <div class="gp_control_sub_volume">
+      <a href="javascript:;" class="gp_control_sub_volume_icon-mute jp-mute">
+        <span class="glyphicon glyphicon-volume-up"></span>
+      </a>
+      <a href="javascript:;" class="gp_control_sub_volume_icon-unmute jp-unmute">
+        <span class="glyphicon glyphicon-volume-off"></span>
+      </a>
+      <div class="gp_control_sub_volume_total jp-volume-bar">
+        <div class="gp_control_sub_volume_val jp-volume-bar-value"></div>
+      </div>
+    </div>
+  </section>
+  <section class="gp_control_progress">
+    <p class="gp_control_title">
+      <span class="<%= @vol.show.label_class %>"><%= @vol.show.name %></span>
+      <span class="label label-info"><%= @vol.show_no %></span>
+      <%= @vol.title %>
+    </p>
+    <div class="gp_control_progressbar">
+      <div class="gp_control_progressbar_current jp-current-time">00:00</div>
+      <div class="gp_control_progressbar_inner jp-progress">
+        <div class="gp_control_progressbar_seek jp-seek-bar">
+          <div class="gp_control_progressbar_play jp-play-bar"></div>
+        </div>
+      </div>
+      <div class="gp_control_progressbar_duration jp-duration">00:00</div>
+    </div>
+  </section>
+</footer>
