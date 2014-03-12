@@ -9,7 +9,8 @@
         <li>
           <%= link_to card_url(card), target: "_blank" do %>
             <div class="gp_cards_img">
-              <span class="label label-info"><%= t.at_time %> ms</span>
+              <span class="label label-default"><%= t.card.card_type_name %></span>
+              <span class="label label-info"><%= t.at_time %> s</span>
               <%= image_tag thumb_image_path(card), class: "img-thumbnail" %>
             </div>
             <p class="gp_cards_title"><%= card.title %></p>

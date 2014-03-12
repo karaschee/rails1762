@@ -73,7 +73,15 @@ body {
     .label {
       position: absolute;
       top: 7px;
-      left: 22px;
+      left: 136px;
+    }
+    .label-default {
+      display: block;
+      white-space: normal;
+      line-height: 1.5;
+      width: 70px;
+      top: 30px;
+      text-align: left;
     }
   }
   .gp_cards_title {
