@@ -10,12 +10,20 @@
       <% end %>
     </small>
   </h1>
-  <p>
-    <span class="label label-default">走心</span>
-    <span class="label label-default">技术帝</span>
-    <span class="label label-default">GTA5</span>
-    <span class="label label-default">GTA</span>
-  </p>
+
+  <div class="gp_tags">
+    <% @tags.each do |tag| %>
+      <a class="label label-default j_tag" href="javascript:;" title="认同此标签"><%= tag.name %></a>
+    <% end %>
+    <span class="form-inline">
+      <span style="display:none;">
+        <input type="text" class="form-control input-sm">
+        <button class="btn btn-default btn-sm">添加</button>
+      </span>
+      <a class="label label-primary" id="j_addtag" href="javascript:;">增加标签</a>
+    </span>
+  </div>
+
   <p>
     <blockquote>
       <%= @vol.desc %>
@@ -30,29 +38,14 @@
 
 <%= content_for :javascripts do %>
   <script type="text/javascript">
-    // onload for the iscroll, it must get all width and height
-    window.onload = function(){
+
+    $(function(){
       var listCards = $('#j_cards');
       var itemsCards = listCards.find('li');
 
       var timeline = <%= @timelines.map { |t| t.at_time } %>;
-      var currentTime;
-
-      // scorllbar init
-      var iscrollconfig = {
-        scrollbars: true,
-        mouseWheel: true,
-        interactiveScrollbars: true,
-        shrinkScrollbars: 'scale',
-        fadeScrollbars: true
-      };
-
-      var sContainer = new IScroll('#j_container', iscrollconfig);
-      var sCards = new IScroll('#j_cardsContainer', iscrollconfig);
-      var sSide = new IScroll('#j_sidebar', iscrollconfig);
-
-      document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-
+      var currentTime;  
+      
       // jplayer init
       $("#j_player").jPlayer({
         ready: function () {
@@ -91,9 +84,25 @@
           }
         }
         return -1;
-      }
+      }    
+    });
 
+    // onload for the iscroll, it must get all width and height
+    window.onload = function(){
+      // scorllbar init
+      var iscrollconfig = {
+        scrollbars: true,
+        mouseWheel: true,
+        interactiveScrollbars: true,
+        shrinkScrollbars: 'scale',
+        fadeScrollbars: true
+      };
 
+      var sContainer = new IScroll('#j_container', iscrollconfig);
+      var sCards = new IScroll('#j_cardsContainer', iscrollconfig);
+      var sSide = new IScroll('#j_sidebar', iscrollconfig);
+
+      document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
     };
   </script>
 <% end %>
