@@ -3,6 +3,7 @@ class Card < ActiveRecord::Base
   has_many :timelines, dependent: :destroy
   has_many :volumes, through: :timelines
   has_one :thumb_image, as: :thumb_imageable
+  has_many :tags, as: :tagable
   accepts_nested_attributes_for :thumb_image
 
   validates :title, presence: true, uniqueness: { scope: :card_type_id }

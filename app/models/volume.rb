@@ -2,6 +2,7 @@ class Volume < ActiveRecord::Base
   belongs_to :show
   has_many :timelines, dependent: :destroy
   has_many :cards, through: :timelines
+  has_many :tags, as: :tagable
   has_one :thumb_image, as: :thumb_imageable
   # has_many :volume_tags
   # has_many :tags, through: "volume_tags"
