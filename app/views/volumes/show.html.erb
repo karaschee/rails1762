@@ -11,14 +11,14 @@
     </small>
   </h1>
 
-  <div class="gp_tags">
+  <div class="gp_tags" id="j_tags">
     <% @tags.each do |tag| %>
       <a class="label label-default j_tag" href="javascript:;" title="认同此标签"><%= tag.name %></a>
     <% end %>
     <span class="form-inline">
       <span style="display:none;">
         <input type="text" class="form-control input-sm">
-        <button class="btn btn-default btn-sm">添加</button>
+        <button class="btn btn-default btn-sm" data-post-url="<%= volume_tags_url(@vol) %>">添加</button>
       </span>
       <a class="label label-primary" id="j_addtag" href="javascript:;">增加标签</a>
     </span>
@@ -38,6 +38,28 @@
 
 <%= content_for :javascripts do %>
   <script type="text/javascript">
+
+    $(function(){
+      var btnAddTag = $('#j_addtag');
+      var elemTagForm = btnAddTag.siblings();
+      var btnConfirmTag = elemTagForm.find('button');
+      var inputTag = elemTagForm.find('input');
+      var elemTags = $('#j_tags');
+      btnAddTag.on('click', function(){
+        elemTagForm.show();
+        btnAddTag.hide();
+      });
+      btnConfirmTag.on('click', function(){
+        var val = inputTag.val();
+        var btn = $(this);
+        btn.button('loading');
+        $.post(btn.data('post-url'), { tag: val }, function(){
+          btn.button('reset');
+          elemTags.prepend(val);
+        })
+      });
+    });
+
 
     $(function(){
       var listCards = $('#j_cards');

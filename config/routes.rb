@@ -27,8 +27,9 @@ Rails1762::Application.routes.draw do
   resources :card_types, only: [:index] do
     resources :cards, only: [:index]
   end
-  resources :volumes, only: [:index, :show]
-  resources :tags, only: [:create, :update]
+  resources :volumes, only: [:index, :show] do
+    resources :tags, only: [:create, :update]
+  end
 
   root 'pages#home'
 
