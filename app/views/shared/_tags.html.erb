@@ -8,13 +8,13 @@
       <a href="javascript:;" class="g_tag_addCount j_updateCount" data-post-url="<%= tag_url(tag) %>" title="认同此标签">
         <b>+</b>
       </a>
-      <%= link_to tag.name, tag_url(tag), class: "label label-default j_tag" %>
+      <%= link_to tag.name, search_url(key: tag.name), class: "label label-default j_tag" %>
     </span>
   <% end %>
   <span class="form-inline">
     <span style="display:none;">
       <input type="text" class="form-control input-sm" placeholder="请在15个字以内">
-      <button class="btn btn-default btn-sm" data-post-url="<%= volume_tags_url(vol) %>">添加</button>
+      <button class="btn btn-default btn-sm" data-post-url="<%= tags_url(belongto_id: belongto_id, belongto_type: belongto_type) %>">添加</button>
     </span>
     <a class="label label-default g_tag_addBtn" id="j_addtag" href="javascript:;">增加标签</a>
   </span>
@@ -33,11 +33,13 @@
       var staticTip = new $.Tinytip({
         txt: '提交成功。',
         container: '#j_tags',
+        css: {top:0},
         skins: 'noicon'
       });
 
       var loadingTip = new $.Tinytip({
-        container: '#j_tags'
+        container: '#j_tags',
+        css: {top:0}
       });
 
       btnAddTag.on('click', function(){

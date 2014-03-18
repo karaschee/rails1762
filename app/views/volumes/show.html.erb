@@ -11,7 +11,7 @@
     </small>
   </h1>
 
-  <%= render partial: "shared/tags", locals: { tags: @tags, vol: @vol } %>
+  <%= render partial: "shared/tags", locals: { tags: @tags, belongto_id: @vol.id, belongto_type: 'Volume' } %>
 
   <p>
     <blockquote>

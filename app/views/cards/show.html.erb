@@ -20,6 +20,7 @@
             <% end %>
             <p class="gcd_header_info_desc"><%= @card.desc %></p>
           </div>
+          <%= render partial: "shared/tags", locals: { tags: @tags, belongto_id: @card.id, belongto_type: 'Card' } %>
         </div>
       </div>
     </div>

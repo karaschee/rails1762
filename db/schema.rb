@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20140313030201) do
     t.datetime "updated_at"
   end
 
+  add_index "tags", ["name"], name: "index_tags_on_name"
   add_index "tags", ["tagable_id", "tagable_type"], name: "index_tags_on_tagable_id_and_tagable_type"
 
   create_table "thumb_images", force: true do |t|

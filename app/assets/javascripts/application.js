@@ -2,6 +2,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require tinytip
 
 // header scroll style change
 (function(){

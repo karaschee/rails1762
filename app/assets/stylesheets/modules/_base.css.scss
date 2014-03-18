@@ -19,7 +19,7 @@
   }
 
   overflow: hidden;
-  padding: 10px 0;
+  padding: 3px 0 8px;
   .form-inline .form-control {
     display: inline-block !important;
     width: auto !important;
@@ -69,7 +69,8 @@
       }
     }
   }
-  .g_tags_item-0 { @include labelSkin(#0868ac, #0868ac, #084081, #fff, #084081); }
+  // .g_tags_item-0 { @include labelSkin(#0868ac, #0868ac, #084081, #fff, #084081); }
+  .g_tags_item-0 { @include labelSkin(#2b8cbe, #2b8cbe, #0868ac, #fff, #0868ac); }
   .g_tags_item-1 { @include labelSkin(#2b8cbe, #2b8cbe, #0868ac, #fff, #0868ac); }
   .g_tags_item-2 { @include labelSkin(#2b8cbe, #2b8cbe, #0868ac, #fff, #0868ac); }
   .g_tags_item-3 { @include labelSkin(#4eb3d3, #4eb3d3, #2b8cbe, #fff, #2b8cbe); }

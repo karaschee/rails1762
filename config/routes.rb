@@ -28,11 +28,12 @@ Rails1762::Application.routes.draw do
     resources :cards, only: [:index]
   end
   resources :volumes, only: [:index, :show] do
-    resources :tags, only: [:create]
+    # resources :tags, only: [:create]
   end
-  resources :tags, only: [:show, :update]
+  resources :tags, only: [:update, :create]
 
   root 'pages#home'
+  get 'search' => 'pages#search', as: :search
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

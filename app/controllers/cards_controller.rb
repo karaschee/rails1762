@@ -4,6 +4,7 @@ class CardsController < BaseController
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     @card_content = @card.content.nil? ? '' : markdown.render(@card.content).html_safe
     @vols = @card.volumes.order(:no).uniq
+    @tags = @card.tags.order(count: :desc).limit(10)
   end
 
   def index
