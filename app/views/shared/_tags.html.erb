@@ -1,0 +1,70 @@
+<% 
+# require js tinytip
+%>
+
+<div class="g_tags" id="j_tags">
+  <% @tags.each_with_index do |tag, i| %>
+    <span class="g_tags_item  g_tags_item-<%= i %>">
+      <a href="javascript:;" class="g_tag_addCount j_updateCount" data-post-url="<%= volume_tag_url(vol, tag) %>" title="认同此标签">
+        <b>+</b>
+      </a>
+      <%= link_to tag.name, tag_url(tag), class: "label label-default j_tag" %>
+    </span>
+  <% end %>
+  <span class="form-inline">
+    <span style="display:none;">
+      <input type="text" class="form-control input-sm">
+      <button class="btn btn-default btn-sm" data-post-url="<%= volume_tags_url(vol) %>">添加</button>
+    </span>
+    <a class="label label-primary g_tag_addBtn" id="j_addtag" href="javascript:;">增加标签</a>
+  </span>
+</div>
+
+<%= content_for :javascripts do %>
+  <script type="text/javascript">
+    $(function(){
+      var btnAddTag = $('#j_addtag');
+      var elemTagForm = btnAddTag.siblings();
+      var btnConfirmTag = elemTagForm.find('button');
+      var inputTag = elemTagForm.find('input');
+      var elemTags = $('#j_tags');
+
+      var staticTip = new $.Tinytip({
+        txt: '提交成功。',
+        container: '#j_tags',
+        skins: 'noicon'
+      });
+
+      var loadingTip = new $.Tinytip({
+        container: '#j_tags'
+      });
+
+      btnAddTag.on('click', function(){
+        toggleTagForm();
+      });
+
+      btnConfirmTag.on('click', function(){
+        var val = inputTag.val();
+        var btn = $(this);
+
+        loadingTip.show();
+        btn.button('loading');
+
+        $.post(btn.data('post-url'), { tag: val }, function(){
+          btn.button('reset');
+          toggleTagForm();
+          loadingTip.hide();
+          staticTip.show();
+          setTimeout(function(){
+            staticTip.fadeOut();
+          }, 1000);
+        })
+      });
+
+      function toggleTagForm(){
+        elemTagForm.toggle();
+        btnAddTag.toggle();
+      }
+    });
+  </script>
+<% end %>

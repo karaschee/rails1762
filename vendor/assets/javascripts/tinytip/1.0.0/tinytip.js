@@ -6,7 +6,8 @@
   var defaults = {
     txt: '操作进行中，请稍候',
     container: 'body',
-    css: {}
+    css: {},
+    skins: 'default',
   };
 
   var Tinytip = function(options){
@@ -16,9 +17,13 @@
     var wrapper = $('<div style="display:none;" class="tinytip_wrapper"></div>');
     var container = $(options.container);
 
+    $.each( options.skins.split(' '), function(i, v){
+      wrapper.addClass('tinytip_wrapper-'+v);
+    });
+
     container.append( wrapper.html(options.txt) );
     if(!container.is('body')){
-      wrapper.css({'position': 'absolute', 'top': '30px'});
+      wrapper.css({'position': 'absolute'});
       container.css({'position': 'relative'});
     }
 
@@ -44,6 +49,9 @@
     },
     hide: function(){
       this.wrapper.hide();
+    },
+    fadeOut: function(){
+      this.wrapper.fadeOut();
     },
     reset: function(){
       this.wrapper.html(this.options.txt);

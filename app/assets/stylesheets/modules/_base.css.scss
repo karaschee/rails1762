@@ -1,3 +1,81 @@
+.g_tags {
+  $countBtnW: 15px;
+  $btnH: 22px;
+  @mixin labelSkin($bg, $text, $hover, $hoverBg, $countBg) {
+    background: $bg;
+    .label {
+      border: 1px solid $bg;
+      color: $text;
+      &:hover {
+        color: $hover;
+        background: $hoverBg;
+      }
+    }
+    .g_tag_addCount {
+      &:hover {
+        background: $countBg;
+      }
+    }
+  }
+
+  overflow: hidden;
+  padding: 10px 0;
+  .form-inline .form-control {
+    display: inline-block !important;
+    width: auto !important;
+    vertical-align: middle !important;
+  }
+  .label {
+    float: left;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: $btnH;
+    line-height: $btnH;
+  }
+  .g_tag_addBtn, .g_tags_item {
+    margin: 4px 10px 4px 0;
+  }
+
+  .g_tags_item {
+    @include labelSkin($gBlackLight, $gGrayS, $gGray, $gAboutWhite, $gGrayS);
+
+    position: relative;
+    float: left;
+    padding-left: $countBtnW;
+    .label {
+      background: #fff;
+      line-height: ($btnH - 2);
+      border-radius: 0;
+      &:hover {
+      }
+    }
+    .g_tag_addCount {
+      position: absolute;
+      left: 0;
+      width: $countBtnW;
+      height: $btnH;
+      line-height: $btnH;
+      color: #fff;
+      text-align: center;
+      b {
+        display: none;
+      }
+      &:hover {
+        b {
+          display: inline;
+        }
+        text-decoration: none;
+      }
+    }
+  }
+  // .g_tags_item-0 { @include labelSkin(#2066CA, #2066CA, #fff, #2066CA, #2082CA); }
+  // .g_tags_item-0 { @include labelSkin($bg, $text, $hover, $hoverBg, $countBg); }
+  // .g_tags_item-0 { @include labelSkin($bg, $text, $hover, $hoverBg, $countBg); }
+  // .g_tags_item-0 { @include labelSkin($bg, $text, $hover, $hoverBg, $countBg); }
+  // .g_tags_item-0 { @include labelSkin($bg, $text, $hover, $hoverBg, $countBg); }
+  // .g_tags_item-0 { @include labelSkin($bg, $text, $hover, $hoverBg, $countBg); }
+}
+
 .g_sideNav {
   padding: 10px 0;
   border-right: 1px solid $gGraySS;

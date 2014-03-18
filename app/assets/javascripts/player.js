@@ -4,6 +4,8 @@
 //= require bootstrap
 //= require jplayer
 //= require iscroll/5.1.1/iscroll.js
+//= require tinytip
+
 
 $(function(){
   // resize and load page

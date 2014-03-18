@@ -30,6 +30,7 @@ Rails1762::Application.routes.draw do
   resources :volumes, only: [:index, :show] do
     resources :tags, only: [:create, :update]
   end
+  resources :tags, only: [:show]
 
   root 'pages#home'
 
