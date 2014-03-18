@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 20140313030201) do
   end
 
   create_table "tags", force: true do |t|
-    t.string   "name",                     null: false
-    t.integer  "count",        default: 1, null: false
+    t.string   "name",         limit: 15,             null: false
+    t.integer  "count",                   default: 1, null: false
     t.integer  "tagable_id"
     t.string   "tagable_type"
     t.datetime "created_at"
