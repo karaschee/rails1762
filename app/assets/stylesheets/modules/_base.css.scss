@@ -37,7 +37,8 @@
   }
 
   .g_tags_item {
-    @include labelSkin($gBlackLight, $gGrayS, $gGray, $gAboutWhite, $gGrayS);
+    // @include labelSkin(#bebebe, #aaa, $gGray, $gAboutWhite, $gGrayS);
+    @include labelSkin(#7bccc4, #7bccc4, #4eb3d3, #fff, #4eb3d3); // 4 level
 
     position: relative;
     float: left;
@@ -68,12 +69,19 @@
       }
     }
   }
-  // .g_tags_item-0 { @include labelSkin(#2066CA, #2066CA, #fff, #2066CA, #2082CA); }
-  // .g_tags_item-0 { @include labelSkin($bg, $text, $hover, $hoverBg, $countBg); }
-  // .g_tags_item-0 { @include labelSkin($bg, $text, $hover, $hoverBg, $countBg); }
-  // .g_tags_item-0 { @include labelSkin($bg, $text, $hover, $hoverBg, $countBg); }
-  // .g_tags_item-0 { @include labelSkin($bg, $text, $hover, $hoverBg, $countBg); }
-  // .g_tags_item-0 { @include labelSkin($bg, $text, $hover, $hoverBg, $countBg); }
+  .g_tags_item-0 { @include labelSkin(#0868ac, #0868ac, #084081, #fff, #084081); }
+  .g_tags_item-1 { @include labelSkin(#2b8cbe, #2b8cbe, #0868ac, #fff, #0868ac); }
+  .g_tags_item-2 { @include labelSkin(#2b8cbe, #2b8cbe, #0868ac, #fff, #0868ac); }
+  .g_tags_item-3 { @include labelSkin(#4eb3d3, #4eb3d3, #2b8cbe, #fff, #2b8cbe); }
+  .g_tags_item-4 { @include labelSkin(#4eb3d3, #4eb3d3, #2b8cbe, #fff, #2b8cbe); }
+  .g_tags_item-5 { @include labelSkin(#4eb3d3, #4eb3d3, #2b8cbe, #fff, #2b8cbe); }
+  .g_tags_item-6 { @include labelSkin(#7bccc4, #7bccc4, #4eb3d3, #fff, #4eb3d3); }
+  .g_tags_item-7 { @include labelSkin(#7bccc4, #7bccc4, #4eb3d3, #fff, #4eb3d3); }
+  .g_tags_item-8 { @include labelSkin(#7bccc4, #7bccc4, #4eb3d3, #fff, #4eb3d3); }
+  // .g_tags_item- { @include labelSkin(#a8ddb5, #a8ddb5, #7bccc4, #fff, #7bccc4); }
+  // .g_tags_item- { @include labelSkin(#ccebc5, #ccebc5, #a8ddb5, #fff, #a8ddb5); }
+  // .g_tags_item- { @include labelSkin(#e0f3db, #e0f3db, #ccebc5, #fff, #ccebc5); }
+  // .g_tags_item- { @include labelSkin(#f7fcf0, #f7fcf0, #e0f3db, #fff, #e0f3db); }
 }
 
 .g_sideNav {

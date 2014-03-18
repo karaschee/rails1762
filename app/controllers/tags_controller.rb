@@ -9,6 +9,7 @@ class TagsController < ApplicationController
     else
       vol.tags.create name: tag_txt
     end
+    cookies.permanent.signed[:remember_me] = [current_user.id, current_user.salt]
     respond_to do |format|
       format.js {
         render json: {}
@@ -18,6 +19,14 @@ class TagsController < ApplicationController
   end
 
   def update
+    tag = Tag.find(params[:id])
+    tag.update_attribute :count, tag[:count]+1
+    respond_to do |format|
+      format.js {
+        render json: {}
+      }
+      format.html {}
+    end
   end
 
   def destroy

@@ -5,7 +5,7 @@
 <div class="g_tags" id="j_tags">
   <% @tags.each_with_index do |tag, i| %>
     <span class="g_tags_item  g_tags_item-<%= i %>">
-      <a href="javascript:;" class="g_tag_addCount j_updateCount" data-post-url="<%= volume_tag_url(vol, tag) %>" title="认同此标签">
+      <a href="javascript:;" class="g_tag_addCount j_updateCount" data-post-url="<%= tag_url(tag) %>" title="认同此标签">
         <b>+</b>
       </a>
       <%= link_to tag.name, tag_url(tag), class: "label label-default j_tag" %>
@@ -13,10 +13,10 @@
   <% end %>
   <span class="form-inline">
     <span style="display:none;">
-      <input type="text" class="form-control input-sm">
+      <input type="text" class="form-control input-sm" placeholder="请在15个字以内">
       <button class="btn btn-default btn-sm" data-post-url="<%= volume_tags_url(vol) %>">添加</button>
     </span>
-    <a class="label label-primary g_tag_addBtn" id="j_addtag" href="javascript:;">增加标签</a>
+    <a class="label label-default g_tag_addBtn" id="j_addtag" href="javascript:;">增加标签</a>
   </span>
 </div>
 
@@ -26,6 +26,7 @@
       var btnAddTag = $('#j_addtag');
       var elemTagForm = btnAddTag.siblings();
       var btnConfirmTag = elemTagForm.find('button');
+      var btnsAddCount = $('.j_updateCount');
       var inputTag = elemTagForm.find('input');
       var elemTags = $('#j_tags');
 
@@ -59,6 +60,21 @@
             staticTip.fadeOut();
           }, 1000);
         })
+      });
+
+      btnsAddCount.on('click', function(){
+        loadingTip.show();
+        $.ajax({
+          type: "PATCH",
+          url: $(this).data('post-url'),
+          success: function(){
+            loadingTip.hide();
+            staticTip.show();
+            setTimeout(function(){
+              staticTip.fadeOut();
+            }, 1000);
+          }
+        });
       });
 
       function toggleTagForm(){

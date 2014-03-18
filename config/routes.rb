@@ -28,9 +28,9 @@ Rails1762::Application.routes.draw do
     resources :cards, only: [:index]
   end
   resources :volumes, only: [:index, :show] do
-    resources :tags, only: [:create, :update]
+    resources :tags, only: [:create]
   end
-  resources :tags, only: [:show]
+  resources :tags, only: [:show, :update]
 
   root 'pages#home'
 

@@ -8,6 +8,6 @@ class VolumesController < BaseController
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     @vol_content = @vol.content.nil? ? '' : markdown.render(@vol.content).html_safe
     @timelines = @vol.timelines.order(:at_time)
-    @tags = @vol.tags.order(:count)
+    @tags = @vol.tags.order(count: :desc).limit(10)
   end
 end
