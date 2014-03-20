@@ -6,6 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
+staff = Staff.create(
+  name: 'karaschee',
+  password: '123456',
+  password_confirmation: '123456'
+)
+
 show_gadio = Show.create(
   name: 'Gadio',
   desc: '国内首家游戏网络电台，最新最全的游戏新闻。热门游戏报道，游戏心得分享，以及业内最专业的游戏人访谈。涵盖所有游戏主机，由糖蒜广播大力支持。',

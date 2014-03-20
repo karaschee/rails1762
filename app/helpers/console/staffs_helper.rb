@@ -1,0 +1,2 @@
+module Console::StaffsHelper
+end
