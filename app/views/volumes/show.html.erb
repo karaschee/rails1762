@@ -27,70 +27,89 @@
 
 <%= content_for :javascripts do %>
   <script type="text/javascript">
-    $(function(){
+    (function(){
+      var sCards;
       var listCards = $('#j_cards');
-      var itemsCards = listCards.find('li');
 
-      var timeline = <%= @timelines.map { |t| t.at_time } %>;
-      var currentTime;  
-      
-      // jplayer init
-      $("#j_player").jPlayer({
-        ready: function () {
-          $(this).jPlayer("setMedia", {
-            mp3: "<%= @vol.resource %>"
-          });
-        },
-        cssSelectorAncestor: '#j_player_ui',
-        solution: 'flash, html',
-        swfPath: "/jplayer.swf",
-        supplied: "mp3",
+      $(function(){
+        var itemsCards = listCards.find('li');
 
-        // events
-        timeupdate: function(e){
-          // console.log(e.jPlayer.status.currentTime); // 250ms
-          // console.log(e.jPlayer.status.duration); // buffer
-          var time = parseInt(e.jPlayer.status.currentTime);
-          if(time === currentTime) return;
+        var timeline = <%= @timelines.map { |t| t.at_time } %>;
+        var currentTime;  
+        
+        // jplayer init
+        $("#j_player").jPlayer({
+          ready: function () {
+            $(this).jPlayer("setMedia", {
+              mp3: "<%= @vol.resource %>"
+            });
+          },
+          cssSelectorAncestor: '#j_player_ui',
+          solution: 'flash, html',
+          swfPath: "/jplayer.swf",
+          supplied: "mp3",
 
-          currentTime = time;
+          // events
+          timeupdate: function(e){
+            // console.log(e.jPlayer.status.currentTime); // 250ms
+            // console.log(e.jPlayer.status.duration); // buffer
+            var time = parseInt(e.jPlayer.status.currentTime);
+            if(time === currentTime) return;
 
-          var matchIndex = getMatchIndex(currentTime);
-          console.log('match: '+matchIndex);
-          if( matchIndex !== -1 ){
-            var currentItem = itemsCards.eq(matchIndex);
-            currentItem.addClass('active').siblings().removeClass('active');
-            sCards.scrollToElement(currentItem[0], 1200, null, true, IScroll.utils.ease.circular)
+            currentTime = time;
+
+            var matchIndex = getMatchIndex(currentTime);
+            // console.log('match: '+matchIndex);
+            if( matchIndex !== -1 ){
+              var currentItem = itemsCards.eq(matchIndex);
+              currentItem.addClass('active').siblings().removeClass('active');
+              if(!listCards.hasClass('gp_cards-manual')){
+                sCards && sCards.scrollToElement(currentItem[0], 1200, null, true, IScroll.utils.ease.circular);
+              }
+            }
           }
-        }
+        });
+
+        function getMatchIndex(currentTime){
+          for(var i in timeline){
+            if(parseInt(currentTime) == timeline[i]){
+              return i;
+            }
+          }
+          return -1;
+        }    
       });
 
-      function getMatchIndex(currentTime){
-        for(var i in timeline){
-          if(parseInt(currentTime) == timeline[i]){
-            return i;
-          }
-        }
-        return -1;
-      }    
-    });
+      // onload for the iscroll, it must get all width and height
+      window.onload = function(){
+        // scorllbar init
+        var iscrollconfig = {
+          scrollbars: true,
+          mouseWheel: true,
+          interactiveScrollbars: true,
+          shrinkScrollbars: 'scale',
+          fadeScrollbars: true,
+          disableMouse: true
+        };
 
-    // onload for the iscroll, it must get all width and height
-    window.onload = function(){
-      // scorllbar init
-      var iscrollconfig = {
-        scrollbars: true,
-        mouseWheel: true,
-        interactiveScrollbars: true,
-        shrinkScrollbars: 'scale',
-        fadeScrollbars: true
+        var timeoutScroll;
+
+        var sContainer = new IScroll('#j_container', iscrollconfig);
+        var sSide = new IScroll('#j_sidebar', iscrollconfig);
+        sCards = new IScroll('#j_cardsContainer', iscrollconfig);
+
+        sCards.on('scrollStart', function(e){
+          clearTimeout(timeoutScroll);
+          listCards.addClass('gp_cards-manual');
+        });
+        sCards.on('scrollEnd', function(e){
+          setTimeout(function(){
+            listCards.removeClass('gp_cards-manual');
+          }, 10000);
+        });
+
+        document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
       };
-
-      var sContainer = new IScroll('#j_container', iscrollconfig);
-      var sCards = new IScroll('#j_cardsContainer', iscrollconfig);
-      var sSide = new IScroll('#j_sidebar', iscrollconfig);
-
-      document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-    };
+    })();
   </script>
 <% end %>

@@ -57,10 +57,16 @@ body {
   text-align: center;
   font-size: 12px;
   li {
+    @include vendor-prefix(transition, opacity .5s ease 0);
     opacity: .5;
     margin-bottom: 20px;
     &.active {
       opacity: 1;
+    }
+  }
+  &.gp_cards-manual {
+    li {
+      opacity: 1 !important;
     }
   }
   p {
