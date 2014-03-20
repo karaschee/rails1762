@@ -1,0 +1,13 @@
+<p class="lead">登录</p>
+
+<%= simple_form_for(:session, url: console_sessions_url, html: { class: "form", multipart: true }, defaults: { input_html: { class: 'form-control' } }) do |f| %>
+  <%= f.input :name, label: "ID" %>
+
+  <%= f.input :password, label: "密码" %>
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">登录</button>
+  </div>
+<% end %>
+
+<% content_for :is_signin, true %>

@@ -1,5 +1,9 @@
 Rails1762::Application.routes.draw do
   namespace :console do
+    get 'signin' => 'sessions#new' # console_signin_url
+    delete 'signout' => 'sessions#destroy' # console_signout_url
+    resources :sessions, only: [:create]
+
     resources :shows
 
     resources :volumes do

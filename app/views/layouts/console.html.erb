@@ -14,28 +14,36 @@
 <body>
   <%= render 'layouts/console/header' %>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-sm-2" role="navigation">
-        <%= render 'layouts/console/nav' %>
+  <% unless yield(:is_signin).present? %>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3" role="navigation">
+          <%= render 'layouts/console/nav' %>
+        </div>
+
+        <div class="col-sm-9">
+          <%= render partial: "layouts/console/flash" %>
+          <%= yield %>
+        </div>
       </div>
 
-      <div class="col-xs-12 col-sm-10">
-        <% flash.each do |key, value| %>
-          <%= content_tag(:div, value, class: "alert alert-#{key}") %>
-          <!-- <div class="alert alert-<%= key %>"><%= value %></div> -->
-        <% end %>
-        <%= yield %>
+      <hr>
+
+      <footer>
+        <p>© Company 2014</p>
+      </footer>
+
+    </div>
+  <% else %>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-offset-2 col-xs-8 col-sm-offset-3 col-sm-6" role="navigation">
+          <%= render partial: "layouts/console/flash" %>
+          <%= yield %>
+        </div>
       </div>
     </div>
-
-    <hr>
-
-    <footer>
-      <p>© Company 2014</p>
-    </footer>
-
-  </div>
+  <% end %>
   
   <!-- Javascripts -->
   <script type="text/javascript">
