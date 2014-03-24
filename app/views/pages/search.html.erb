@@ -1,3 +1,34 @@
-<% @results.each do |r| %>
-<%= r.tagable_type %>:<%= r.tagable.title or r.tagable.name  %>
+<% content_for :main_title, "#{@key}" %>
+<% content_for :sub_title, "关于此tag找到#{@results.length}条搜索结果" %>
+
+<%= render_search_filter %>
+
+<% @results.each do |tag|
+  if tag.tagable_type == 'Volume'
+    link_path = volume_url(tag.tagable)
+  elsif tag.tagable_type == 'Card'
+    link_path = card_url(tag.tagable)
+  else
+    link_path = '#'
+  end
+  img_tag = image_tag thumb_image_path(tag.tagable), class: "media-object"
+%>
+  <div class="media">
+    <%= link_to link_path, class: "pull-left" do %>
+      <%= img_tag %>
+    <% end %>
+
+    <div class="media-body">
+      <h4 class="media-heading">
+        <strong>
+          <%= link_to link_path do %>
+            <span class="label label-primary"><%= tag.tagable_type %></span> <%= tag.tagable.title or tag.tagable.name %>
+          <% end %>
+        </strong>
+      </h4>
+      <p><%= tag.tagable.desc %></p>
+    </div>
+  </div>
 <% end %>
+
+<%= paginate @results, :theme => 'bootstrap' %>

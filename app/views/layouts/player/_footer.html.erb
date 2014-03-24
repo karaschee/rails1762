@@ -3,8 +3,16 @@
   <section class="gp_control_actions">
     <a href="javascript:;" class="gp_play jp-play"><span class="glyphicon glyphicon-play"></span></a>
     <a href="javascript:;" class="gp_pause jp-pause"><span class="glyphicon glyphicon-pause"></span></a>
-    <a href="javascript:;" class="gp_next"><span class="glyphicon glyphicon-forward"></span></a>
-    <a href="javascript:;" class="gp_prev"><span class="glyphicon glyphicon-backward"></span></a>
+
+    <!-- next -->
+    <%= link_to volume_url(@next), class: "gp_next" do %>
+      <span class="glyphicon glyphicon-forward">
+    <% end %>
+
+    <!-- prev -->
+    <%= link_to volume_url(@prev), class: "gp_prev" do %>
+      <span class="glyphicon glyphicon-backward">
+    <% end %>
   </section>
   <section class="gp_control_sub">
     <div class="gp_control_sub_volume">

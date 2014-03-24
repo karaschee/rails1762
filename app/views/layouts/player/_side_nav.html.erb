@@ -4,7 +4,7 @@
       <%= @vol.show.name %> - <%= @vol.title %>
     </p> -->
     <ul class="g_sideNav list-unstyled">
-      <% @vol.show.volumes.each do |v| %>
+      <% @vols.each do |v| %>
         <%= nav_link "#{v.show_no} #{v.title}", volume_url(v) %>
       <% end %>
     </ul>

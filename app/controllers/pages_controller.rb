@@ -4,7 +4,15 @@ class PagesController < BaseController
 
   def search
     key = params[:key]
-    tags = Tag.where("name = '"+key+"'")
-    @results = tags.order(:tagable_type)
+    type = params[:type]
+    tags = Tag.where(["name = ?", key])
+
+    if type.present?
+      results = tags.where(["tagable_type = ?", type])
+    else
+      results = tags.order(:tagable_type)
+    end
+    @results = Kaminari.paginate_array(results).page(params[:page])
+    @key = key
   end
 end
