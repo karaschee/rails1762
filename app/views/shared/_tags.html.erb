@@ -53,31 +53,38 @@
         loadingTip.show();
         btn.button('loading');
 
-        $.post(btn.data('post-url'), { tag: val }, function(){
-          btn.button('reset');
-          toggleTagForm();
-          loadingTip.hide();
-          staticTip.show();
-          setTimeout(function(){
-            staticTip.fadeOut();
-          }, 1000);
-        })
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: btn.data('post-url'),
+          data: { tag: val }, 
+          success: function(){
+            btn.button('reset');
+            toggleTagForm();
+            hideTip();
+          }
+        });
       });
 
       btnsAddCount.on('click', function(){
         loadingTip.show();
         $.ajax({
           type: "PATCH",
+          dataType: "json",
           url: $(this).data('post-url'),
           success: function(){
-            loadingTip.hide();
-            staticTip.show();
-            setTimeout(function(){
-              staticTip.fadeOut();
-            }, 1000);
+            hideTip();
           }
         });
       });
+
+      function hideTip(){
+        loadingTip.hide();
+        staticTip.show();
+        setTimeout(function(){
+          staticTip.fadeOut();
+        }, 1000);
+      }
 
       function toggleTagForm(){
         elemTagForm.toggle();
