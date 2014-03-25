@@ -24,18 +24,19 @@
       display: block;
       width: 245px;
       height: 100px;
+        padding: 1px;
       background: asset-url('logo.png') 0 0 no-repeat;
-      @include vendor-prefix(transition, background .3s ease 0);
+      @include vendor-prefix(transition, background .2s ease 0);
       &:hover {
         text-decoration: none;
-        padding: 1px;
         background: asset-url('logo-hover.png') 0 0 no-repeat;
         .g_logo_img_hover {
-          display: block;
+          opacity: 1;
         }
       }
       .g_logo_img_hover {
-        display: none;
+        @include vendor-prefix(transition, opacity .2s ease 0);
+        opacity: 0;
         font-size: 16px;
         line-height: 1.6;
         height: 80px;

@@ -1,3 +1,7 @@
+// Global
 g: g-cores
 gcd: g-cores(family) card(page)
 gp: g-cores(family) player(app)
+
+// Page
+ph: page site_home
