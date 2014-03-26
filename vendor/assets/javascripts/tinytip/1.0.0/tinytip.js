@@ -49,12 +49,20 @@
     },
     hide: function(){
       this.wrapper.hide();
+      this.reset();
     },
     fadeOut: function(){
-      this.wrapper.fadeOut();
+      var that = this;
+      this.wrapper.fadeOut(function(){
+        that.hide()
+      });
     },
     reset: function(){
       this.wrapper.html(this.options.txt);
+    },
+    updateTip: function(txt){
+      this.wrapper.html(txt);
+      this.options.txt = txt;
     }
   });
 

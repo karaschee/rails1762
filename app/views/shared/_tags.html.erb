@@ -58,10 +58,14 @@
           dataType: "json",
           url: btn.data('post-url'),
           data: { tag: val }, 
-          success: function(){
+          success: function(data){
             btn.button('reset');
-            toggleTagForm();
-            hideTip();
+            if(data.stat == 0){
+              hideTip('你已经提交过tag了');
+            }else {
+              toggleTagForm();
+              hideTip();
+            }
           }
         });
       });
@@ -72,15 +76,15 @@
           type: "PATCH",
           dataType: "json",
           url: $(this).data('post-url'),
-          success: function(){
-            hideTip();
+          success: function(data){
+            hideTip(data.stat == 0 ? '你已经提交过tag了' : undefined);
           }
         });
       });
 
-      function hideTip(){
+      function hideTip(txt){
         loadingTip.hide();
-        staticTip.show();
+        staticTip.show(txt);
         setTimeout(function(){
           staticTip.fadeOut();
         }, 1000);
