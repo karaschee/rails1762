@@ -40,22 +40,12 @@ class TagsController < ApplicationController
   private
 
     def validate_auth(existed)
-      counted = cookies[:counted]
-      unless counted.present?
-        cookies[:counted] = { :value => "", :expires => 1.day.from_now }
-        counted = []
-      else
-        begin
-          counted = ActiveSupport::JSON.decode(counted)
-        rescue
-          cookies[:counted] = { :value => "", :expires => 1.day.from_now }
-          counted = []
-        end
-      end
-      if counted.include? existed
+      key = 'count_' + existed
+      counted = cookies.signed[key]
+      if counted.present?
         return false
       else
-        cookies[:counted] = { :value => ActiveSupport::JSON.encode(counted.push(existed)), :expires => 1.day.from_now }
+        cookies.signed[key] = { value: 1, :expires => 1.day.from_now }
         return true
       end
     end
