@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20140320054747) do
     t.datetime "updated_at"
   end
 
-  add_index "cards", ["card_type_id"], name: "index_cards_on_card_type_id"
+  add_index "cards", ["card_type_id"], name: "index_cards_on_card_type_id", using: :btree
 
   create_table "shows", force: true do |t|
     t.string   "name",       null: false
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(version: 20140320054747) do
     t.datetime "updated_at"
   end
 
-  add_index "tags", ["name"], name: "index_tags_on_name"
-  add_index "tags", ["tagable_id", "tagable_type"], name: "index_tags_on_tagable_id_and_tagable_type"
+  add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
+  add_index "tags", ["tagable_id", "tagable_type"], name: "index_tags_on_tagable_id_and_tagable_type", using: :btree
 
   create_table "thumb_images", force: true do |t|
     t.string   "asset"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20140320054747) do
     t.datetime "updated_at"
   end
 
-  add_index "thumb_images", ["thumb_imageable_id", "thumb_imageable_type"], name: "by_imageable"
+  add_index "thumb_images", ["thumb_imageable_id", "thumb_imageable_type"], name: "by_imageable", using: :btree
 
   create_table "timelines", force: true do |t|
     t.integer  "volume_id",  null: false
@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(version: 20140320054747) do
     t.datetime "updated_at"
   end
 
-  add_index "timelines", ["card_id"], name: "index_timelines_on_card_id"
-  add_index "timelines", ["volume_id"], name: "index_timelines_on_volume_id"
+  add_index "timelines", ["card_id"], name: "index_timelines_on_card_id", using: :btree
+  add_index "timelines", ["volume_id"], name: "index_timelines_on_volume_id", using: :btree
 
   create_table "volumes", force: true do |t|
     t.integer  "show_id",    null: false
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20140320054747) do
     t.datetime "updated_at"
   end
 
-  add_index "volumes", ["no"], name: "index_volumes_on_no"
-  add_index "volumes", ["show_id"], name: "index_volumes_on_show_id"
+  add_index "volumes", ["no"], name: "index_volumes_on_no", using: :btree
+  add_index "volumes", ["show_id"], name: "index_volumes_on_show_id", using: :btree
 
 end
