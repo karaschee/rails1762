@@ -16,9 +16,10 @@ gem 'mini_magick'
 gem 'carrierwave'
 gem 'simple_form'
 gem 'redcarpet'
+gem 'mysql2'
 
 group :development, :test do
-  gem 'sqlite3', '1.3.8'
+  # gem 'sqlite3', '1.3.8'
 
   # rspec
   gem 'rspec-rails', '2.13.1' # 封装 RSpec 的程序，还包含了一些专为 Rails 提供的功能
