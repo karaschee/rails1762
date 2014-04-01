@@ -24,7 +24,7 @@ development:
 test:
   adapter: mysql2
   encoding: utf8
-  reconnect: false
+  reconnect: false   
   database: rails1762_test
   pool: 5
   username: root
