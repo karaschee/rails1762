@@ -1,6 +1,17 @@
 .g_wrapper {
-  padding-top: 100px;
+  position: relative;
+  z-index: 0;
+  padding: 150px 0 100px;
 }
+
+
+.g_footer {
+  margin-top: 0;
+  hr {
+    margin-top: 0;
+  }
+}
+
 
 @media screen and (max-width: 768px) {
   .g_wrapper {
@@ -9,8 +20,7 @@
 }
 
 .ph_introsite {
-  position: relative;
-  z-index: 0;
+
   height: 300px;
 
   h1 {
@@ -30,8 +40,8 @@
   }
 
   .ph_introsite_bdmask {
-    background: #000;
-    opacity: .2;
+    background: #fff;
+    opacity: .6;
   }
 
   * {

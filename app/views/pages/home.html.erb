@@ -51,7 +51,34 @@
 <%= content_for :javascripts do %>
   <script type="text/javascript">
     $(function(){
-      stackBlur.blurImage( 'j_bgimg', 'j_canvas', 40, false );
+      // stackBlur.blurImage( 'j_bgimg', 'j_canvas', 40, false );
+
+      function resetImg(){
+        var img = document.getElementById( 'j_bgimg' );
+        var w = img.naturalWidth;
+        var h = img.naturalHeight;
+        var ww = $(window).width();
+        var wh = $('.ph_introsite_bdmask').height();
+
+        var canvas = document.getElementById( 'j_canvas' );
+            
+        canvas.style.width  = ww + "px";
+        canvas.style.height = wh + "px";
+        canvas.width = ww;
+        canvas.height = wh;
+        
+        var context = canvas.getContext("2d");
+        context.clearRect( 0, 0, ww, wh );
+        context.drawImage( img, 0, 0, ww, ww*h/w );
+
+        stackBlur.blurCanvasRGB( 'j_canvas', 0, 0, ww, ww*h/w, 40 );
+      }
+
+      resetImg();
+
+      $(window).resize(function(){
+        resetImg();
+      });
     });
   </script>
 <% end %>
