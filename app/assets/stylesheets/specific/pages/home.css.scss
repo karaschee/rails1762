@@ -90,6 +90,7 @@
   .ph_introsite_bdmask {
     background: #000;
     opacity: .8;
+    filter:alpha(opacity=80);
   }
   .ph_introsite_bgimg {
     display: none;
