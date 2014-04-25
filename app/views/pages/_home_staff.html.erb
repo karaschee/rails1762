@@ -9,7 +9,7 @@
             <div class="g_staff_thumb">
               <%= image_tag thumb_image_path(dj) %>
             </div>
-            <h3><%= link_to dj.title, card_type_cards_url(dj) %></h3>
+            <h3><%= link_to dj.title, card_url(dj) %></h3>
             <hr>
             <p><%= dj.desc %></p>
           </div>
