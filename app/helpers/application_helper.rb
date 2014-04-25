@@ -29,8 +29,8 @@ module ApplicationHelper
 
   def include_module(name)
     case name
-      when 'module_name'
-#        include_related_asset 'path/to/module.js'
+      when 'shiv_respond'
+       include_related_asset 'shiv_respond.js'
     end
   end
 

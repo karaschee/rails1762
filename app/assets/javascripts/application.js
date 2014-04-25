@@ -8,7 +8,7 @@
 (function(){
   var elemh = $('.g_header');
   var scrollClass = 'g_header-scroll';
-  $(document).on('scroll', function(){
+  $(window).on('scroll', function(){
     var t = $(document).scrollTop();
     if(t > 5){
       elemh.addClass(scrollClass);

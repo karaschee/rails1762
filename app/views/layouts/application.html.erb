@@ -1,21 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= render partial: "layouts/head", locals: { layout_name: 'application' } %>
   <title><%= content_for?(:main_title) ? yield(:main_title)+" | " : "" %>G-cores Fan Club</title>
-
-  <!-- Stylesheets -->
-  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <%= render 'layouts/stylesheets' %>
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!a--[if lt IE 9]>
-    <%= javascript_include_tag "shiv_respond", "data-turbolinks-track" => true %>
-  <!a[endif]-->
-
-  <%= csrf_meta_tags %>
 </head>
 <body>
   <%= render "layouts/application/header" %>  

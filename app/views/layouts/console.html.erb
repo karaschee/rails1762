@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= render partial: "layouts/head", locals: { layout_name: 'console' } %>
   <title>Rails1762</title>
-
-  <!-- Stylesheets -->
-  <%= stylesheet_link_tag "console", media: "all", "data-turbolinks-track" => true %>
-  <%= render 'layouts/stylesheets' %>
-
-  <%= csrf_meta_tags %>
 </head>
 <body>
   <%= render 'layouts/console/header' %>

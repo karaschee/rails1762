@@ -7,7 +7,7 @@
     txt: '操作进行中，请稍候',
     container: 'body',
     css: {},
-    skins: 'default',
+    skins: 'default'
   };
 
   var Tinytip = function(options){
