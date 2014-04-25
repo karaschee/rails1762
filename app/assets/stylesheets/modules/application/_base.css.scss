@@ -108,3 +108,33 @@ body {
     }
   }
 }
+
+.g_staff {
+  margin: 60px 5px 20px;
+  padding: 10px 0;
+  background: #fff;
+  border-radius: 10px;
+  text-align: center;
+
+  .g_staff_thumb {
+    margin-top: -50px;
+  }
+  h3 {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  h3, p {
+    padding: 0 20px;
+  }
+  hr {
+    width: 65%;
+    margin: 10px auto;
+    // border-bottom: 1px solid $gGraySS;
+  }
+  p {
+    font-size: 12px; 
+    line-height: 21px;
+    height: 63px;
+    overflow: hidden;
+  }
+}

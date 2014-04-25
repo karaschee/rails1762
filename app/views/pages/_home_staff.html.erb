@@ -1,0 +1,24 @@
+<div class="ph_introsite ph_introsite-staff">
+  <%= image_tag "home-staff2-bg.jpg", id: "j_bgimg", class: "ph_introsite_bgimg" %>
+  <canvas style="" id="j_canvas" class="ph_introsite_bgcanvas"></canvas>
+  <div class="container">
+    <div class="row">
+      <% @djs.each_with_index do |dj, i| %>
+        <div class="col-md-3 col-sm-6 <%= 'hidden-sm' if i > 1 %> <%= 'hidden-xs' if i > 0 %>">
+          <div class="g_staff">
+            <div class="g_staff_thumb">
+              <%= image_tag thumb_image_path(dj) %>
+            </div>
+            <h3><%= link_to dj.title, card_type_cards_url(dj) %></h3>
+            <hr>
+            <p><%= dj.desc %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="ph_introsite-staff_more">
+      <%= link_to "认识更多的主播 &raquo;".html_safe, card_types_url %>
+    </div>
+  </div>
+</div>

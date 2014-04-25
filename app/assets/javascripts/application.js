@@ -3,7 +3,6 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require tinytip
-//= require StackBlur
 
 // header scroll style change
 (function(){
