@@ -4,7 +4,7 @@ $(function(){
   var staffbg = new Blur({
     imgid: 'j_bgimg',
     canvasid: 'j_canvas',
-    deep: 70,
+    deep: 100,
     container: '.ph_introsite-staff',
     repeat: true
   });
