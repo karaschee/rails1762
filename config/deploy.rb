@@ -1,7 +1,7 @@
 require 'bundler/capistrano'
 
 set :application, "rails1762"
-set :repository,  "git@github.com:you-github-username/your-app-repository.git"
+set :repository,  "git@192.168.11.127:/opt/git/rails1762.git"
 set :deploy_to, "/var/www/rails1762"
 set :scm, :git
 set :branch, "master"
