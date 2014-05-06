@@ -18,8 +18,10 @@ set :keep_releases, 5
 default_run_options[:pty] = true
 server "#{$SERVER}", :app, :web, :db, :primary => true
 
+# set :normalize_asset_timestamps, false
+
 set :rvm_type, :local
-set :rvm_ruby_string, "ruby-2.0.0-p195@1762"
+set :rvm_ruby_string, "ruby-2.0.0-p195"
 
 namespace :deploy do
   task :start do ; end
@@ -27,13 +29,8 @@ namespace :deploy do
 
   desc "Symlink shared config files"
   task :symlink_config_files do
-    run "#{ sudo } ln -s #{ deploy_to }/shared/config/database.yml #{ current_path }/config/database.yml"
+    run "#{ sudo } ln -s #{ deploy_to }/shared/config/database.yml #{ release_path }/config/database.yml"
   end
-
-  # desc "Bundle"
-  # task :bundle do
-  #   run "cd #{deploy_to}/current && bundle install"
-  # end
 
   desc "Restart applicaiton"
   task :restart do
@@ -44,6 +41,6 @@ end
 
 # before 'deploy', 'rvm:install_ruby'
 
-after "deploy", "deploy:symlink_config_files"
+before "deploy:assets:update_asset_mtimes", "deploy:symlink_config_files"
 after "deploy", "deploy:restart"
 after "deploy", "deploy:cleanup"
