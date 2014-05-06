@@ -1,7 +1,10 @@
 require 'bundler/capistrano'
+require "rvm/capistrano"
+
+$SERVER = '192.168.11.127'
 
 set :application, "rails1762"
-set :repository,  "git@192.168.11.127:/opt/git/rails1762.git"
+set :repository,  "ssh://git@#{$SERVER}:4321/opt/git/rails1762.git"
 set :deploy_to, "/var/www/rails1762"
 set :scm, :git
 set :branch, "master"
@@ -13,7 +16,10 @@ set :deploy_via, :copy
 set :ssh_options, { :forward_agent => true, :port => 4321 }
 set :keep_releases, 5
 default_run_options[:pty] = true
-server "192.168.11.127", :app, :web, :db, :primary => true
+server "#{$SERVER}", :app, :web, :db, :primary => true
+
+set :rvm_type, :local
+set :rvm_ruby_string, "ruby-2.0.0-p195@1762"
 
 namespace :deploy do
   task :start do ; end
@@ -24,22 +30,20 @@ namespace :deploy do
     run "#{ sudo } ln -s #{ deploy_to }/shared/config/database.yml #{ current_path }/config/database.yml"
   end
 
-  # NOTE: I don't use this anymore, but this is how I used to do it.
-  desc "Precompile assets after deploy"
-  task :precompile_assets do
-    run <<-CMD
-      cd #{ current_path } &&
-      #{ sudo } bundle exec rake assets:precompile RAILS_ENV=#{ rails_env }
-    CMD
-  end
+  # desc "Bundle"
+  # task :bundle do
+  #   run "cd #{deploy_to}/current && bundle install"
+  # end
 
   desc "Restart applicaiton"
   task :restart do
+    # run "#{ try_sudo } touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
     run "#{ try_sudo } touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
   end
 end
 
+# before 'deploy', 'rvm:install_ruby'
+
 after "deploy", "deploy:symlink_config_files"
 after "deploy", "deploy:restart"
 after "deploy", "deploy:cleanup"
-
