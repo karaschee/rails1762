@@ -23,6 +23,12 @@ server "#{$SERVER}", :app, :web, :db, :primary => true
 set :rvm_type, :local
 set :rvm_ruby_string, "ruby-2.0.0-p195"
 
+# disable 
+set :bundle_dir, ''
+set :bundle_flags, '--system --quiet'
+
+
+
 namespace :deploy do
   task :start do ; end
   task :stop do ; end
