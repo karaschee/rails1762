@@ -34,6 +34,10 @@ group :development, :test do
   gem 'rvm-capistrano'
 end
 
+group :production do
+  gem 'passenger'
+end
+
 group :test do
   gem 'libnotify', '0.8.0'
   gem 'selenium-webdriver', '2.35.1' # 结合 Capybara 测试基于 JavaScript 的交互操作
