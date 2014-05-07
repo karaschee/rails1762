@@ -58,6 +58,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    daemon_controller (1.1.5)
     database_cleaner (1.0.1)
     diff-lcs (1.2.5)
     erubis (2.7.0)
@@ -125,6 +126,10 @@ GEM
       net-ssh (>= 2.6.5)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    passenger (4.0.19)
+      daemon_controller (>= 1.1.0)
+      rack
+      rake (>= 0.8.1)
     polyglot (0.3.3)
     pry (0.9.12.4)
       coderay (~> 1.0)
@@ -244,6 +249,7 @@ DEPENDENCIES
   libnotify (= 0.8.0)
   mini_magick
   mysql2
+  passenger
   rails (= 4.0.2)
   redcarpet
   rspec-rails (= 2.13.1)
