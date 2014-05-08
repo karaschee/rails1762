@@ -21,9 +21,9 @@ server "#{$SERVER}", :app, :web, :db, :primary => true
 # set :normalize_asset_timestamps, false
 
 set :rvm_type, :local
-set :rvm_ruby_string, "ruby-2.0.0-p195"
+set :rvm_ruby_string, "ruby-2.0.0-p195@1762"
 
-# disable 
+# disable bundle deployment
 set :bundle_dir, ''
 set :bundle_flags, '--system --quiet'
 
