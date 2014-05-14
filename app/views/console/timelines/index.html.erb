@@ -10,8 +10,13 @@
     </div>
     <hr>
     <div id="j_searchCard">
+      <div class="form-inline">
+        <div class="form-group">
+          <input type="text" class="form-control" id="j_inputSearch" placeholder="查找资料卡" />
+          <button id="j_refreshCards" class="btn btn-default">更新所有Card</button>
+        </div>
+      </div>
       <p>
-        <input type="text" class="form-control" id="j_inputSearch" placeholder="查找资料卡" />
       </p>
       <div class="pct_cardsList">
         <table class="table table-hover table-bordered">
@@ -68,12 +73,13 @@
     <div>
       <div>
         <!-- http://c.tangsuanradio.com/gamecores/gadiovol102.mp3 -->
-        <p>
-          <audio id="j_player" src="[%= value %]" controls autoplay>
-            Your browser does not support the audio element
-          </audio>
-        </p>
-        <p><button type="button" id="j_btnEditResource" class="btn btn-xs btn-default">编辑</button> <em>[%= value %]</em></p> 
+        <audio id="j_player" src="[%= value %]" controls autoplay>
+          Your browser does not support the audio element
+        </audio>
+        <p style="word-break:break-all;word-wrap:break-word;">
+          <button type="button" id="j_btnEditResource" class="btn btn-xs btn-default">编辑</button>
+          <em>[%= value %]</em>
+        </p> 
         <p>
           <span class="label label-default">总时长度： <strong id="j_info_total">~</strong></span> 
           <span class="label label-primary">目前进度： <strong id="j_info_current">~</strong></span>
