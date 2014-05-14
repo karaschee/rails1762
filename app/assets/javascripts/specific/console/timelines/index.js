@@ -228,17 +228,13 @@
 
   var CardsView = Backbone.View.extend({
     el: '#j_searchCard',
+    events: {
+      'keyup #j_inputSearch': 'search',
+      'click #j_refreshCards': 'refresh'
+    },
     initialize: function(){
-      var that = this;
-      var cards = new Cards();
-
       this.elemList = this.$el.find('table');
-
-      cards.fetch({success: function(collection, response, options){
-        that.collection = collection;
-        that.initCardView();
-        that.render('');
-      }});
+      this.refresh();
     },
     render: function(filter){
       var tmpBox = $('<div>');
@@ -259,11 +255,18 @@
         });
       });
     },
-    events: {
-      'keyup #j_inputSearch': 'search'
-    },
     search: function(e){
       this.render( $(e.target).val() );
+    },
+    refresh: function(){
+      var that = this,
+          cards = new Cards();
+          
+      cards.fetch({success: function(collection, response, options){
+        that.collection = collection;
+        that.initCardView();
+        that.render('');
+      }});
     }
   });
 
