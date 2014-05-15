@@ -15,6 +15,11 @@
 
 <hr>
 
+<p class="gc_filter">
+  <%= link_to "时间排序", params.merge({order: :time, page: nil}), class: "#{(params[:order] == 'time' or params[:order].nil?) ? "active" : ""}" %>
+  <%= link_to "期数排序", params.merge({order: :no, page: nil}), class: "#{current_page?(order: :no) ? "active" : ""}" %>
+</p>
+
 <%= if_data_present(@volumes) do %>
   <div class="table-responsive">
     <table class="table table-hover table-striped">

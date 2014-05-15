@@ -5,12 +5,14 @@ class Console::VolumesController < Console::ConsoleBaseController
 
   def index
     show_id = params[:show_id]
+    order = params[:order]
     if show_id.present?
       @show = Show.find(show_id)
-      @volumes = @show.volumes.order(no: :asc).page(params[:page])
+      @volumes = @show.volumes
     else
-      @volumes = Volume.all.order(no: :asc).page params[:page]
+      @volumes = Volume.all
     end
+    @volumes = @volumes.order(order == 'no' ? {no: :desc} : {created_at: :desc}).page(params[:page])
   end
 
   def new

@@ -30,3 +30,16 @@ textarea {
   max-width: 100%;
   max-height: 100%;
 }
+
+.gc_filter {
+  font-size: 12px;
+  text-align: right;
+}
+.gc_filter a {
+  margin-left: 10px;
+  color: #808080;
+}
+.gc_filter a.active {
+  font-weight: bold;
+  color: #404040;
+}
