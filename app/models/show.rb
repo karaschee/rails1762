@@ -1,6 +1,6 @@
 class Show < ActiveRecord::Base
-  has_one :thumb_image, as: :thumb_imageable
-  has_many :tags, as: :tagable
+  has_one :thumb_image, as: :thumb_imageable, dependent: :destroy
+  # has_many :tags, as: :tagable
   has_many :volumes, dependent: :nullify
 
   accepts_nested_attributes_for :thumb_image

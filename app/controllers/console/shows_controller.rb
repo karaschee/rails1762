@@ -47,6 +47,6 @@ class Console::ShowsController < Console::ConsoleBaseController
     end
 
     def show_params
-      params.require(:show).permit(:name, :desc, :content, :thumb_image_attributes)
+      params.require(:show).permit(:name, :desc, :content, thumb_image_attributes: [:asset])
     end
 end

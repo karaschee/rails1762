@@ -58,7 +58,7 @@ class Console::CardsController < Console::ConsoleBaseController
     end
 
     def card_params
-      params.require(:card).permit(:card_type_id, :title, :desc, :content, :thumb_image_attributes)
+      params.require(:card).permit(:card_type_id, :title, :desc, :content, thumb_image_attributes: [:asset])
     end
 
     def get_card_types
