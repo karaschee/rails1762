@@ -1,5 +1,6 @@
 <p class="lead">
-  <%= @volume.title %> - 管理资料卡
+  管理资料卡 - <%= link_to @volume.title, volume_url(@volume), target: "_blank" %>
+  <small>/ <%= link_to "返回编辑节目", edit_console_volume_url(@volume) %></small>
 </p>
 
 

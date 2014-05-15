@@ -7,9 +7,9 @@ class Console::VolumesController < Console::ConsoleBaseController
     show_id = params[:show_id]
     if show_id.present?
       @show = Show.find(show_id)
-      @volumes = Kaminari.paginate_array(@show.volumes).page(params[:page])
+      @volumes = @show.volumes.order(no: :asc).page(params[:page])
     else
-      @volumes = Volume.page params[:page]
+      @volumes = Volume.all.order(no: :asc).page params[:page]
     end
   end
 
@@ -57,7 +57,7 @@ class Console::VolumesController < Console::ConsoleBaseController
     end
 
     def volume_params
-      params.require(:volume).permit(:title, :desc, :show_id, :thumbnail, :content, :thumb_image_attributes)
+      params.require(:volume).permit(:title, :desc, :no, :show_id, :thumbnail, :content, :thumb_image_attributes)
     end
 
     def get_shows

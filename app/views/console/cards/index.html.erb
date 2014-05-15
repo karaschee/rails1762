@@ -21,7 +21,7 @@
       <tbody>
         <% @cards.each do |card| %>
           <tr>
-            <td><%= card.title %></td>
+            <td><%= link_to card.title, card_url(card), target: "_blank" %></td>
             <td><%= card.card_type.name if card.card_type.present? %></td>
             <td><%= card.created_at %></td>
             <td>

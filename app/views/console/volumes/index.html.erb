@@ -30,7 +30,7 @@
       <tbody>
         <% @volumes.each do |vol| %>
           <tr>
-            <td><%= vol.title %></td>
+            <td><%= link_to "#{vol.show_no} #{vol.title}", volume_url(vol), target: "_blank" %></td>
             <td><%= vol.belonged_show %></td>
             <td><%= vol.created_at %></td>
             <td>
