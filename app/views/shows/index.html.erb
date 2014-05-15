@@ -16,7 +16,7 @@
   <div class="col-md-8">
     <% @shows.each do |show| %>
       <% 
-        first_vol = show.volumes.first
+        first_vol = show.volumes.order(no: :desc).first
         img_tag = image_tag thumb_image_path(show), class: "media-object img-circle"
       %>
       <div class="media">

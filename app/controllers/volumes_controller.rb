@@ -5,7 +5,7 @@ class VolumesController < BaseController
 
   def show
     @vol = Volume.find(params[:id])
-    @vols = @vol.show.volumes.order(:no)
+    @vols = @vol.show.volumes.order(no: :desc)
 
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     @vol_content = @vol.content.nil? ? '' : markdown.render(@vol.content).html_safe
