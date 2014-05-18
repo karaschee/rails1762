@@ -4,7 +4,8 @@ class Card < ActiveRecord::Base
   has_many :timelines, dependent: :destroy
   has_many :volumes, through: :timelines
   has_many :tags, as: :tagable, dependent: :destroy
-  accepts_nested_attributes_for :thumb_image
+  accepts_nested_attributes_for :thumb_image, :allow_destroy => true,
+                                :reject_if => lambda {|a| a[:asset].blank?}
 
   validates :title, presence: true, uniqueness: { scope: :card_type_id }
 

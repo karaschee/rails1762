@@ -3,7 +3,8 @@ class Show < ActiveRecord::Base
   # has_many :tags, as: :tagable
   has_many :volumes, dependent: :nullify
 
-  accepts_nested_attributes_for :thumb_image
+  accepts_nested_attributes_for :thumb_image, :allow_destroy => true,
+                                :reject_if => lambda {|a| a[:asset].blank?}
   
   validates :name,  presence: true, uniqueness: true
 

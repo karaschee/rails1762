@@ -7,7 +7,8 @@ class Volume < ActiveRecord::Base
   # has_many :volume_tags
   # has_many :tags, through: "volume_tags"
 
-  accepts_nested_attributes_for :thumb_image
+  accepts_nested_attributes_for :thumb_image, :allow_destroy => true,
+                                :reject_if => lambda {|a| a[:asset].blank?}
   validates :show_id,  presence: true
   validates :title,  presence: true, uniqueness: { scope: :show_id }
 
