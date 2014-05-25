@@ -18,7 +18,7 @@
     url: _DATA_.pathUpdateResource,
     defaults: {
       value: _DATA_.resourceVal,
-      mode: 'show' // edit \ show
+      mode: '' // edit \ show
     },
     initialize: function(){
     },
@@ -39,12 +39,6 @@
     initialize: function(){
       var resource = new Resource();
       var that = this;
-      
-      if(resource.get('value') === ''){ // edit
-        resource.set({mode: 'edit'});
-      }else { // show
-        this.refreshInfo();
-      }
 
       resource.on('invalid', function(model, error){
         if(error.status === 0){
@@ -61,16 +55,59 @@
         }})
       });
       this.listenTo(this.model, 'change:mode', this.render);
-      this.listenTo(this.model, 'change:mode', this.modeChange);
-      this.render();
+
+      if(resource.get('value') === ''){ // edit
+        this.editMode();
+      }else { // show
+        this.showMode();
+      }
     },
     render: function(){
       this.$el.html( this.template(this.model.toJSON()) );
+      this.player = $('#j_player');
+
+      if(this.model.get('mode') === 'edit'){
+        clearInterval(this.timerInfo);
+        this.timerInfo = false;
+      }else {
+        this.refreshInfo();
+      }
     },
     events: {
       'click button#j_btnConfirmResource': 'confirmEdit',
       'click button#j_btnEditResource': 'editMode',
-      'click button#j_btnCancelResource': 'showMode'
+      'click button#j_btnCancelResource': 'showMode',
+
+      'click button#j_start': function(){
+        this.player[0].play();
+      },
+      'click button#j_pause': function(){
+        this.player[0].pause();
+      },
+      'click button#j_prev5': function(){
+        this.player[0].currentTime -= 5;
+      },
+      'click button#j_prev30': function(){
+        this.player[0].currentTime -= 30;
+      },
+      'click button#j_prev60': function(){
+        this.player[0].currentTime -= 60;
+      },
+      'click button#j_prev600': function(){
+        this.player[0].currentTime -= 600;
+      },
+      'click button#j_next5': function(){
+        this.player[0].currentTime += 5;
+      },
+      'click button#j_next30': function(){
+        this.player[0].currentTime += 30;
+      },
+      'click button#j_next60': function(){
+        this.player[0].currentTime += 60;
+      },
+      'click button#j_next600': function(){
+        this.player[0].currentTime += 600;
+      }
     },
     confirmEdit: function(){
       var url = this.$el.find('input').val().trim();
@@ -81,7 +118,9 @@
       }else {
         $('#j_btnConfirmResource').button('loading');
         this.model.set({value: url});
+        this.player = $('#j_player');
       }
+
     },
     editMode: function(){
       this.model.set({mode: 'edit'});
@@ -93,10 +132,11 @@
       $('#j_tip').modal('show');
     },
     refreshInfo: function(){
+      var that = this;
       this.timerInfo = this.timerInfo || setInterval(function(){
-        var player = $('#j_player');
+        var player = that.player;
 
-        if(player.length === 0) return;
+        if( !(player && player.length !== 0) ) return;
 
         var total = player.prop('duration');
         var current = player.prop('currentTime');
@@ -106,12 +146,6 @@
         $('#j_info_total').html(total);
         $('#j_info_current').html(current);
       }, 1000);
-    },
-    modeChange: function(){
-      if(this.model.get('mode') === 'edit'){
-        clearInterval(this.timerInfo);
-        this.timerInfo = false;
-      }
     }
   });
 
@@ -214,7 +248,7 @@
       'click .j_addCard': 'createTimeline'
     },
     createTimeline: function(e){
-      var player = $('#j_player');
+      var player = ResourceView.palyer;
 
       if( isNaN(player.prop('duration')) ) return;
 
