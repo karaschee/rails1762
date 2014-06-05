@@ -8,15 +8,17 @@
         <h3><%= link_to ct.name, card_type_cards_url(ct) %></h3>
         <hr>
         <p><%= ct.desc %></p>
-        <ul class="g_cardtype_cards clearfix list-unstyled">
-          <% ct.cards.all[0..10].each do |c| %>
-            <li>
-              <%= link_to card_url(c) do %>
-                <%= image_tag thumb_image_path(c), class: "j_card media-object img-circle", "data-toggle" => "tooltip", "data-placement" => "top", title: "#{c.title}" %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
+        <div class="g_cardtype_cards clearfix">
+          <ul class=" list-unstyled">
+            <% ct.cards.all[0..10].each do |c| %>
+              <li>
+                <%= link_to card_url(c) do %>
+                  <%= image_tag thumb_image_path(c), class: "j_card media-object img-circle", "data-toggle" => "tooltip", "data-placement" => "top", title: "#{c.title}" %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
   <% end %>

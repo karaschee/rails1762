@@ -94,11 +94,14 @@ body {
     box-sizing: content-box;
     border-top: $gGrayEx 1px solid;
     background: #f4f4f4;
-    padding-top: 15px;
-    padding-bottom: 15px;
     margin: 0;
-    height: 110px;
     overflow: hidden;
+    ul {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      height: 110px;
+    }
     li {
       float: left;
       margin: 0 10px 10px 0;
