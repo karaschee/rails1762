@@ -248,8 +248,7 @@
       'click .j_addCard': 'createTimeline'
     },
     createTimeline: function(e){
-      var player = ResourceView.palyer;
-
+      var player = resourceView.player;
       if( isNaN(player.prop('duration')) ) return;
 
       timelinesView.collection.create({
@@ -275,7 +274,7 @@
       this.collection.each(function(card){
         var view = card.get('view');
         if(card.get('toFilter').indexOf(filter) !== -1){
-          tmpBox.append(view.render());
+          tmpBox.append( view.setElement(view.render()).$el );
         }
       });
       this.elemList.html( tmpBox.children().length === 0 ? '<tr><td>未搜索到结果</td></tr>' : tmpBox.children() );

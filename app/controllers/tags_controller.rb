@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   def create
     belongto_id = params[:belongto_id]
     belongto_type = params[:belongto_type]
-    is_auth = validate_auth belongto_type+belongto_id
+    is_auth = true #validate_auth belongto_type+belongto_id
 
     if is_auth
       tag_txt = params[:tag]
@@ -24,7 +24,7 @@ class TagsController < ApplicationController
 
   def update
     tag = Tag.find(params[:id])
-    is_auth = validate_auth tag.tagable_type+tag.tagable_id.to_s
+    is_auth = true #validate_auth tag.tagable_type+tag.tagable_id.to_s
     tag.update_attribute :count, tag[:count]+1 if is_auth
     respond_to do |format|
       format.js {
