@@ -11,6 +11,8 @@ class Volume < ActiveRecord::Base
                                 :reject_if => lambda {|a| a[:asset].blank?}
   validates :show_id,  presence: true
   validates :title,  presence: true, uniqueness: { scope: :show_id }
+  
+  default_scope order: "created_at DESC"
 
   def belonged_show
     show.present? ? show.name : "无"

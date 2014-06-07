@@ -7,15 +7,20 @@
       <% @timelines.each do |t| %>
         <% card = t.card %>
         <li>
-          <%= link_to card_url(card), target: "_blank" do %>
             <div class="gp_cards_img">
-              <span class="label label-default"><%= t.card.card_type_name %></span>
-              <span class="label label-info"><%= t.at_time %> s</span>
-              <%= image_tag thumb_image_path(card), class: "img-thumbnail" %>
+              <span class="gp_cards_type label label-default"><%= t.card.card_type_name %></span>
+              <a href="javascript:;" class="gp_cards_timeline j_to" data-time="<%= t.at_time %>">
+                <span class="label label-info">
+                  to <br>
+                  <%= t.at_time %> s
+                </span>
+              </a>
+              <%= link_to card_url(card), target: "_blank" do %>
+                <%= image_tag thumb_image_path(card), class: "img-thumbnail" %>
+              <% end %>
             </div>
             <p class="gp_cards_title"><%= card.title %></p>
             <p class="gp_cards_desc"><%= card.desc %></p>
-          <% end %>
         </li>
       <% end %>
     </ul>

@@ -7,6 +7,8 @@ class Show < ActiveRecord::Base
                                 :reject_if => lambda {|a| a[:asset].blank?}
   
   validates :name,  presence: true, uniqueness: true
+  
+  default_scope order: "created_at DESC"
 
   NAME_ID_MAP = {
     gadio: 1,
@@ -19,6 +21,8 @@ class Show < ActiveRecord::Base
       'label label-primary'
     when Show::NAME_ID_MAP[:twod]
       'label label-success'
+    else 
+      'label label-default'
     end
   end
 end

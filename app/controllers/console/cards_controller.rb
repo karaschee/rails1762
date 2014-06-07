@@ -6,10 +6,10 @@ class Console::CardsController < Console::ConsoleBaseController
     card_type_id = params[:card_type_id]
     if card_type_id.present?
       @card_type = CardType.find(card_type_id)
-      @cards = Kaminari.paginate_array(@card_type.cards).page(params[:page])
+      @cards = @card_type.cards.page(params[:page])
     else
       @card_type = nil
-      @cards = Card.page params[:page]
+      @cards = Card.all.page(params[:page])
     end
     respond_to do |format|
       format.js {

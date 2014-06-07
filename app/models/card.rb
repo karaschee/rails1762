@@ -9,6 +9,8 @@ class Card < ActiveRecord::Base
 
   validates :title, presence: true, uniqueness: { scope: :card_type_id }
 
+  default_scope order: "created_at DESC"
+
   def card_type_name
     name = card_type.try(:name)
     name.present? ? name : "无"

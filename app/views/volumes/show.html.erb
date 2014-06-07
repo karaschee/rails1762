@@ -33,12 +33,13 @@
 
       $(function(){
         var itemsCards = listCards.find('li');
+        var elemPlayer = $("#j_player");
 
         var timeline = <%= @timelines.map { |t| t.at_time } %>;
         var currentTime;  
         
         // jplayer init
-        $("#j_player").jPlayer({
+        elemPlayer.jPlayer({
           ready: function () {
             $(this).jPlayer("setMedia", {
               mp3: "<%= @vol.resource %>"
@@ -68,6 +69,13 @@
               }
             }
           }
+        });
+
+        $('.j_to').click(function(){
+          var time = $(this).data('time');
+          console.log(time);
+          elemPlayer.jPlayer("play", parseInt(time)-5);
+          return this;
         });
 
         function getMatchIndex(currentTime){

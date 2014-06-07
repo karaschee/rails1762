@@ -1,8 +1,8 @@
 <div class="gp_sidebar" id="j_sidebar">
   <div class="inner">
-  <!--   <p>
-      <%= @vol.show.name %> - <%= @vol.title %>
-    </p> -->
+    <p style="font-size:12px;">
+      <%= @vol.show.name %> 的节目单
+    </p>
     <ul class="g_sideNav list-unstyled">
       <% @vols.each do |v| %>
         <%= nav_link "#{v.show_no} #{v.title}", volume_url(v) %>

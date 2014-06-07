@@ -5,7 +5,7 @@ class TagsController < ApplicationController
     is_auth = true #validate_auth belongto_type+belongto_id
 
     if is_auth
-      tag_txt = params[:tag]
+      tag_txt = params[:tag].strip.underscore.downcase
       exist_tag = Tag.find_by name: tag_txt, tagable_id: belongto_id, tagable_type: belongto_type
       if exist_tag
         exist_tag.update_attribute :count, exist_tag[:count]+1
