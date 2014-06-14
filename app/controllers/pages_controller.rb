@@ -1,6 +1,7 @@
 class PagesController < BaseController
   def home
     @djs = CardType.find(CardType::NAME_ID_MAP[:djs]).cards.limit(4)
+    @volumes = Volume.first(6)
   end
 
   def search

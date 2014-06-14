@@ -42,6 +42,47 @@
     p {
       color: #666;
     }
+
+    .ph_introsite-intro_volumes {
+      .ph_introsite-intro_volumes_item {
+        display: block;
+        text-align:center;
+        margin-bottom: 20px;
+        position: relative;
+
+        &:hover {
+          img {
+            opacity: .8;
+            filter:alpha(opacity=80);
+          }
+          b {
+            display: block;
+          }
+        }
+        img {
+          margin: 0 auto 10px;
+          padding: 3px;
+          background: #fff;
+          border: 1px solid #ddd;
+        }
+        b {
+          display: none;
+          position: absolute;
+          z-index: 1;
+          top: 50%;
+          left: 50%;
+          margin: -15px 0 0 -15px;
+          width: 30px;
+          height: 30px;
+          line-height: 30px;
+          border-radius: 999px;
+          border: 1px solid #000;
+          background: #222;
+          color: #fff;
+          font-size: 12px;
+        }
+      }
+    }
   }
   &.ph_introsite-staff {
     background: #333;
@@ -66,7 +107,7 @@
   }
 
   h1, h2 {
-    margin-top: 0;
+    margin-top: 0px;
     margin-bottom: 20px;
   }
 

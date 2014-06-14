@@ -1,7 +1,7 @@
 <div class="ph_introsite ph_introsite-intro">
   <div class="container">
 
-    <div class="row">
+    <div class="row" style="margin-bottom:30px;">
       <div class="col-sm-9">
         <h2>关于机核网</h2>
         <p style="color:#b3b3b3;">
@@ -44,6 +44,20 @@
           </li>
         </ul>
       </div>
+    </div>
+
+    <h2>近期更新</h2>
+    <div class="row ph_introsite-intro_volumes">
+      <% @volumes.each do |vol| %>
+        <div class="col-sm-2 col-xs-4">
+          <%= link_to volume_url(vol), class: "ph_introsite-intro_volumes_item" do %>
+            <b>
+              <span class="glyphicon glyphicon-play"></span>
+            </b>
+            <%= image_tag thumb_image_path(vol, :sm), class: "img-responsive" %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
